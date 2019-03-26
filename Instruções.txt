@@ -1,0 +1,25 @@
+1) Usando o PGAdmin, crie um banco de dados chamado JPAHibernate no seu PostgreSQL local.
+
+2) verifique e altere, se necessário, o arquivo persistence.xml (CTRL+SHIFT+R), nas linhas 34,35 e 36
+para que seja possível conectar com o banco PostgreSQL local 
+
+3) Faça o Eclipse exibir a janela "Ant". Arraste para ela o arquivo build.xml.
+
+4) Execute a target "run" do Ant. O resultado deve ser semelhante ao a seguir:
+
+ ...
+ 
+ run:
+        [java] log4j:WARN No appenders could be found for logger (org.hibernate.ejb.Version).
+        [java] log4j:WARN Please initialize the log4j system properly.
+        [java] log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+        [java] Cliente José 
+        [java] ---------------------------------------
+        [java] Cliente [id=2, nome=José, endereco=Caxias do Sul, cartaoCredito=1234432155557777]
+BUILD SUCCESSFUL
+ 
+ 5) Se for preciso testar a conexão com o banco, use a classe TesteConexao.java
+ 
+ 6) Execute a target "testador" do Ant. Será exibida a janela de teste de consultas.
+ 
+ 7) Escreva e teste as consultas solicitadas no arquivo "Exercicio.txt"

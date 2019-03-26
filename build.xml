@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="JPAHibernate3" basedir="." default="run">
+
+	<property name="src" value="src"/>
+	<property name="bin" value="classes" />
+	<property name="dist" value="dist" />
+	<property name="lib" value="lib" />
+	<property name="metadata" value="metadata"/>
+	
+	<path id="classpath.base">
+		<fileset dir="${lib}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${dist}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean" >
+		<delete dir="${bin}"/>
+		<delete dir="${dist}"/>
+	</target>
+	
+	<target name="prepare" depends="init">
+		<mkdir dir="${bin}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${lib}" />
+	</target>
+
+	<target name="init">
+		<echo>Iniciando build do projeto ${ant.project.name}</echo>
+	</target>
+	
+	<target name="compile" depends="init, clean, prepare">
+		<javac 	srcdir="${src}" 
+				destdir="${bin}" 
+				verbose="false"
+				source="1.8"
+				target="1.8"
+				encoding="UTF-8">
+			<classpath refid="classpath.base" />
+		</javac>
+	</target>
+	
+	
+	<!-- Empacota a aplicação -->
+	<target name="jar" depends="compile">
+		<jar jarfile="${dist}/${ant.project.name}.jar" >
+			<fileset dir="${bin}"/>
+			<metainf dir="${metadata}">
+				<include name="persistence.xml" />
+			</metainf> 
+		</jar>
+	</target>
+	
+	<target name="run" depends="jar">
+		<java classname="com.testes.TesteJPA" fork="true">
+			<classpath refid="classpath.base" />
+		</java>
+	</target>
+	
+	<target name="testador" depends="jar">
+			<java classname="com.gui.TestadorDeEJBQL" fork="true">
+				<classpath refid="classpath.base" />
+			</java>
+	</target>
+	
+
+</project>

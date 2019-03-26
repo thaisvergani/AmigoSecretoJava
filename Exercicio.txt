@@ -1,0 +1,34 @@
+Implementar as entidades e fazer um programa de simulação que armazene uma nota fical com as informações a seguir:
+
+Uma nota fiscal tem vários itens, cada ítem possui um valor e uma quantidade de um determinado produto. Cada produto
+é fornecido por um determinado fornecedor, sendo que um mesmo fornecedor pode produzir vários produtos.
+
+Todas as entidades devem possuir geradores de sequencia automáticos.
+
+O banco de dados pode ser o HSQLDB ou outro escolhido pelo aluno.
+
+Nota Fiscal ->	Itens Nota -> 	Produtos <-> 	FornecedorPreco <->  Fornecedor
+nro		valor		nome		preço                nome
+data		quantidade	descricao	                     descricao
+ 			                        		
+   |
+   V
+
+Cliente
+nome
+endereco
+nro cartao credito                    
+
+Após, faça uma classe de teste que insira dados em todas as entidades, sendo capaz de emitir uma nota fiscal
+com pelo menos tres produtos. 
+
+Depois, consulte a nota persistida pelo seu Id. A nota deve possuir um método toString preparado para exibir
+todos os dados que uma nota fiscal a qual você está acostumado, inclusive o valor total da venda.
+
+Queries
+
+1) Trazer todas as notas fiscais do cliente "José"
+
+2) Trazer todas as notas fiscais do fornecedor "Petrobrás"
+
+3) Trazer todas as notas fiscais do fornecedor "Petrobrás" que tenham valor superior a R$200,00
