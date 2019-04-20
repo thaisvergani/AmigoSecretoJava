@@ -14,8 +14,7 @@ public class TesteJPA {
 
 	public static void main(String[] args) {
 
-		EntityManagerFactory emf = Persistence
-				.createEntityManagerFactory("JPAStandalone");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAStandalone");
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();
@@ -46,7 +45,7 @@ public class TesteJPA {
 //
 //		em.flush();
 
-		Participante c = new Participante("José");
+		Participante c = new Participante("Jose");
 		em.persist(c);
 		Long idJose = c.getId();
 //

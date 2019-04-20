@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="JPAHibernate3" basedir="." default="run">
+<project name="AmigoSecreto" basedir="." default="run">
 
 	<property name="src" value="src"/>
 	<property name="bin" value="classes" />
