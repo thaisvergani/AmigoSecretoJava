@@ -27,10 +27,15 @@ public class Participante implements Serializable {
 
 	@Column(name = "nome", length = 60, nullable = true)
 	private String nome;
+	
+	@Column(name = "codinome", length = 60, nullable = true)
+	private String codinome;
+	
+	@Column(name = "ramal")
+	private int ramal;
 
 	public Participante(String nome) {
-		this.nome = nome;
-	
+		this.nome = nome;	
 	}
 
 	public Long getId() {
@@ -47,6 +52,22 @@ public class Participante implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getCodinome() {
+		return codinome;
+	}
+	
+	public void setCodinome(String codinome) {
+		this.codinome = codinome;
+	}
+	
+	public int getRamal() {
+		return ramal;
+	}
+	
+	public void setRamal(int ramal) {
+		this.ramal = ramal;
 	}
 
 	@Override

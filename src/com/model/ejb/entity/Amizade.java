@@ -30,6 +30,7 @@ public class Amizade implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Amizade_Sequence")
 	private Long id;
 	
+	@ManyToOne
 	@Column(name="jogo", length=60, nullable=true )
 	private Jogo jogo;
 	
