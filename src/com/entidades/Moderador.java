@@ -1,4 +1,4 @@
-package com.model.ejb.entity;
+package com.entidades;
 
 import java.util.Date;
 

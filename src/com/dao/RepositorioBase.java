@@ -1,4 +1,4 @@
-package com.data;
+package com.dao;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -11,9 +11,10 @@ public abstract class RepositorioBase<T, K> implements DAO<T, K> {
 
 	protected Class<T> entityClass;
 	 
-	@PersistenceContext
+	@PersistenceContext(name="AmigoSecreto")
 	protected EntityManager em;
 		
+	@SuppressWarnings("unchecked")
 	public RepositorioBase() {
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
 		this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[1];
@@ -21,12 +22,26 @@ public abstract class RepositorioBase<T, K> implements DAO<T, K> {
 	
 	@Override
 	public void persistir(T entidade) {
-		em.persist(entidade);
+		try {
+			em.getTransaction().begin();
+			em.persist(entidade);
+			em.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			em.getTransaction().rollback();
+		}
 	}
 
 	@Override
 	public void deletar(T entidade) {
-		em.remove(entidade);
+		try {
+			em.getTransaction().begin();
+			em.remove(entidade);
+			em.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			em.getTransaction().rollback();
+		}	
 	}
 
 	@Override

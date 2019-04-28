@@ -1,4 +1,8 @@
-package com.model.ejb.entity;
+package com.entidades;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,20 +11,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="SugestaoAmigoSecreto")
-@SequenceGenerator(name="SugestaoAmigoSecreto_Sequence", 
-sequenceName="fornecedor_produtos_seq", allocationSize=0, initialValue=1)
-public class SugestaoAmigoSecreto {
+@Table(name="SugestaoPresente")
+@SequenceGenerator(name="SugestaoPresente_Sequence", 
+sequenceName="sugestao_presente_seq", allocationSize=0, initialValue=1)
+public class SugestaoPresente implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, 
-		generator="SugestaoAmigoSecreto_Sequence")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SugestaoPresente_Sequence")
 	private Long id;
 		
+	@ManyToOne
+	@JoinColumn(name="jogo")
+	private Jogo jogo;
+
 	@ManyToOne
 	@JoinColumn(name="participante")
 	private Participante participante;
@@ -28,9 +41,8 @@ public class SugestaoAmigoSecreto {
 	@Column(name="descricao", length=255)
 	private String descricao;	
 
-	public SugestaoAmigoSecreto(
-			Participante participante,
-			String descricao) {
+	public SugestaoPresente(Jogo jogo, Participante participante, String descricao) {
+		this.jogo = jogo;
 		this.participante = participante;
 		this.descricao = descricao;
 	}
@@ -43,11 +55,19 @@ public class SugestaoAmigoSecreto {
 		this.id = id;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -59,13 +79,12 @@ public class SugestaoAmigoSecreto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SugestaoAmigoSecreto other = (SugestaoAmigoSecreto) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		SugestaoPresente other = (SugestaoPresente) obj;
+		if (id != other.id)
 			return false;
 		return true;
 	}
 
+	
+	
 }

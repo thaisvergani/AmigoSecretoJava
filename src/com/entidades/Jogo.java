@@ -1,4 +1,4 @@
-package com.model.ejb.entity;
+package com.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -39,10 +39,14 @@ public class Jogo implements Serializable{
 
 
 	public Jogo(String nome, Date inicio) {
-
 		this.nome = nome;
 		this.inicio = inicio;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

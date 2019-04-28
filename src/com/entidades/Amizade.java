@@ -1,4 +1,4 @@
-package com.model.ejb.entity;
+package com.entidades;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class Amizade implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@Column(name="jogo", length=60, nullable=true )
+	@Column(name="jogo", length=60)
 	private Jogo jogo;
 	
 	@ManyToOne

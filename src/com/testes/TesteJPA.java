@@ -5,16 +5,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.model.ejb.entity.Participante;
-import com.model.ejb.entity.Amizade;
-import com.model.ejb.entity.SugestaoAmigoSecreto;
-import com.model.ejb.entity.SugestaoPresente;
+import com.entidades.Amizade;
+import com.entidades.Participante;
+import com.entidades.SugestaoAmigoSecreto;
+import com.entidades.SugestaoPresente;
 
 public class TesteJPA {
 
 	public static void main(String[] args) {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAStandalone");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("AmigoSecreto");
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();

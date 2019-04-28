@@ -1,7 +1,10 @@
 package com.identidade;
 
-import com.model.ejb.entity.Jogo;
+import java.util.List;
 
-public interface DAOJogos extends DAO<Jogo, Long> {
+import com.entidades.*;
 
+public interface DAOJogos extends DAO<Jogo, Long> {	
+	List<Participante> buscarParticipantesDoJogo(Jogo jogo);
+	void persistirAmizadesDoJogo(List<Amizade> amizades);
 }
