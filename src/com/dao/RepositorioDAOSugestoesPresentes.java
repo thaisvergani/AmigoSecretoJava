@@ -3,9 +3,9 @@ package com.dao;
 import java.util.List;
 
 import com.entidades.*;
-import com.identidade.DAOSugestoesPresentes;
+import com.identidade.RepositorioSugestoesPresentes;
 
-public class RepositorioSugestoesPresentes extends RepositorioBase<SugestaoPresente, Long> implements DAOSugestoesPresentes {
+public class RepositorioDAOSugestoesPresentes extends RepositorioDAOBase<SugestaoPresente, Long> implements RepositorioSugestoesPresentes {
 
 	@SuppressWarnings("unchecked")
 	@Override

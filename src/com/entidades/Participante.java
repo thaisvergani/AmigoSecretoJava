@@ -33,6 +33,10 @@ public class Participante implements Serializable {
 	
 	@Column(name = "ramal")
 	private int ramal;
+	
+	public Participante() {
+		
+	}
 
 	public Participante(String nome) {
 		this.nome = nome;	

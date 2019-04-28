@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.entidades.Jogo;
 import com.entidades.Mensagem;
-import com.identidade.DAOMensagens;
+import com.identidade.RepositorioMensagens;
 
-public class RepositorioMensagens extends RepositorioBase<Mensagem, Long> implements DAOMensagens {
+public class RepositorioDAOMensagens extends RepositorioDAOBase<Mensagem, Long> implements RepositorioMensagens {
 
 	@SuppressWarnings("unchecked")
 	@Override

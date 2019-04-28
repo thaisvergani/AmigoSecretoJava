@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.entidades.SugestaoAmigoSecreto;
 
-public interface DAOSugestoesJogos extends DAO<SugestaoAmigoSecreto, Long> {
+public interface RepositorioSugestoesJogos extends Repositorio<SugestaoAmigoSecreto, Long> {
 	
 	List<SugestaoAmigoSecreto> buscarTodasSugestoes();
 	

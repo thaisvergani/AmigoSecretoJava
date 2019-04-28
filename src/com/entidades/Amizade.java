@@ -40,15 +40,33 @@ public class Amizade implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="amigo_secreto")
-	private Participante amigo_secreto;
+	private Participante amigoSecreto;
 	
-	public Amizade(Participante participante, 
-			Participante amigo_secreto,
-			Jogo jogo) {
+	public Amizade(Participante participante, Jogo jogo) {
 		this.participante = participante;
-		this.amigo_secreto = amigo_secreto;
 		this.jogo = jogo;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public Jogo getJogo() {
+		return jogo;
+	}
+	
+	public Participante getParticipante() {
+		return participante;
+	}
+	
+	public Participante getAmigoSecreto() {
+		return amigoSecreto;
+	}
+	
+	public void setAmigoSecreto(Participante amigoSecreto) {
+		this.amigoSecreto = amigoSecreto;
+	}
+	
 
 	@Override
 	public int hashCode() {

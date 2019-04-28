@@ -5,8 +5,8 @@ import java.util.List;
 import com.entidades.Jogo;
 import com.entidades.Mensagem;
 
-public interface DAOMensagens extends DAO<Mensagem, Long> {
+public interface RepositorioMensagens extends Repositorio<Mensagem, Long> {
 	
 	List<Mensagem> buscarMensagensDoJogo(Jogo jogo);
-		
+	
 }

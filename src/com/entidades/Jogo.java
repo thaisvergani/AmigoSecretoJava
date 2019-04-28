@@ -37,6 +37,9 @@ public class Jogo implements Serializable{
 	@Column(name="nome", nullable=false)
 	private String nome;
 
+	public Jogo() {
+		
+	}
 
 	public Jogo(String nome, Date inicio) {
 		this.nome = nome;
@@ -46,7 +49,30 @@ public class Jogo implements Serializable{
 	public Long getId() {
 		return id;
 	}
-
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public Date getInicio() {
+		return inicio;
+	}
+	
+	public void setInicio(Date inicio) {
+		this.inicio = inicio;
+	}
+	
+	public Date getFim() {
+		return fim;
+	}
+	
+	public void setFim(Date fim) {
+		this.fim = fim;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

@@ -3,9 +3,9 @@ package com.dao;
 import java.util.List;
 
 import com.entidades.Participante;
-import com.identidade.DAOParticipantes;
+import com.identidade.RepositorioParticipantes;
 
-public class RepositorioParticipantes extends RepositorioBase<Participante, Long> implements DAOParticipantes {
+public class RepositorioDAOParticipantes extends RepositorioDAOBase<Participante, Long> implements RepositorioParticipantes {
 	
 	@Override
 	public Participante buscarParticipante(String nomeOuCodinome) {
