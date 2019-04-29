@@ -55,7 +55,6 @@ public class ServicoParticipantes extends ServicoBase {
 
 	public List<Participante> buscarTodos() {
 		return contexto.getRepositorioParticipantes().buscarTodosParticipantes();
-	}
-	
+	}	
 	
 }

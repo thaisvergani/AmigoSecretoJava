@@ -11,7 +11,9 @@ import java.util.Random;
 
 import com.entidades.Amizade;
 import com.entidades.Jogo;
+import com.entidades.Mensagem;
 import com.entidades.Participante;
+import com.entidades.ParticipanteMensagens;
 import com.entidades.SugestaoAmigoSecreto;
 import com.entidades.SugestaoPresente;
 import com.identidade.ContextoAmigoSecreto;
@@ -72,8 +74,8 @@ public class ServicoJogos extends ServicoBase {
 		return sugestao;
 	}
 	
-	public List<SugestaoPresente> buscarSugestaoPresentes(Participante participante) {
-		return contexto.getRepositorioSugestoesPresentes().buscarSugestoes(participante);
+	public List<SugestaoPresente> buscarSugestaoPresentes(Participante participante, Jogo jogo) {
+		return contexto.getRepositorioSugestoesPresentes().buscarSugestoes(participante, jogo);
 	}
 	
 	public SugestaoAmigoSecreto cadastrarSugestaoJogo(Participante participante, String mensagem) throws ExcecaoValidacaoServico {
@@ -92,6 +94,38 @@ public class ServicoJogos extends ServicoBase {
 	
 	public List<SugestaoAmigoSecreto> buscarTodasSugestoesJogo() {
 		return contexto.getRepositorioSugestoesJogos().buscarTodasSugestoes();
+	}
+	
+	public List<Mensagem> buscarMensagensDoJogo(Jogo jogo) {
+		return contexto.getRepositorioMensagens().buscarMensagensDoJogo(jogo);
+	}
+	
+	public List<ParticipanteMensagens> rankingRecebeuMaisMensagens(Jogo jogo) {
+		return contexto.getRepositorioMensagens().rankingRecebeuMaisMensagens(jogo);
+	}
+
+	public List<ParticipanteMensagens> rankingEnviouMaisMensagens(Jogo jogo) {
+		return contexto.getRepositorioMensagens().rankingEnviouMaisMensagens(jogo);
+	}
+	
+	public Mensagem cadastrarMensagem(String texto, String codinomeOrigem, String codinomeDestino, Jogo jogo) throws ExcecaoValidacaoServico {
+		if (texto == null) {
+			throw new ExcecaoValidacaoServico("Necessario informar o texto que deseja enviar na mensagem");
+		}
+		
+		Participante remetente = contexto.getRepositorioParticipantes().buscarParticipante(codinomeOrigem);
+		if (remetente == null) {
+			throw new ExcecaoValidacaoServico("Nao foi possivel encontrar o participante do codinome: " + codinomeOrigem);
+		}
+				
+		Participante destinatario = contexto.getRepositorioParticipantes().buscarParticipante(codinomeDestino);
+		if (destinatario == null) {
+			throw new ExcecaoValidacaoServico("Nao foi possivel encontrar o participante do codinome: " + codinomeDestino);
+		}
+		
+		Mensagem mensagem = new Mensagem(texto, new Date(), remetente, destinatario, jogo);
+		contexto.getRepositorioMensagens().adicionar(mensagem);
+		return mensagem;
 	}
 	
 	private List<Amizade> sorteio(Jogo jogo, List<Participante> participantes, List<Jogo> ultimosJogos) {
