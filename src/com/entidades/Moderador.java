@@ -1,7 +1,5 @@
 package com.entidades;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Moderador")
-@SequenceGenerator(name="Moderador_Sequence", 
-sequenceName="Moderador_seq", allocationSize=0, initialValue=1)
+@SequenceGenerator(name="Moderador_Sequence", sequenceName="Moderador_seq", allocationSize=0, initialValue=1)
 public class Moderador {
 	
 	@Id

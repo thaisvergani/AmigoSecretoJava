@@ -8,7 +8,7 @@ public abstract class ServicoBase {
 	
 	public ServicoBase(ContextoAmigoSecreto contexto) throws IllegalArgumentException {
 		if (contexto == null) {
-			throw new IllegalArgumentException("Contexto da aplicação não pode ser nulo");
+			throw new IllegalArgumentException("Contexto da aplicacao nao pode ser nulo");
 		}
 		
 		this.contexto = contexto;

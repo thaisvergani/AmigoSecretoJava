@@ -1,11 +1,7 @@
 package com.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,19 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="mensagem")
-@SequenceGenerator(name="Mensagem_Sequence", 
-sequenceName="mensagem_seq", allocationSize=0, initialValue=1)
+@SequenceGenerator(name="Mensagem_Sequence", sequenceName="mensagem_seq", allocationSize=0, initialValue=1)
 public class Mensagem implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -49,16 +40,35 @@ public class Mensagem implements Serializable {
 	@JoinColumn(name="remetente")
 	private Participante remetente;
 	
-	public Mensagem(
-			String texto,
-			Date data, 
-			Participante remetente,
-			Participante destinatario) {
+	public Mensagem(String texto, Date data, Participante remetente, Participante destinatario, Jogo jogo) {
 		this.texto = texto;
 		this.data = data;
 		this.remetente = remetente;
 		this.destinatario = destinatario;
+		this.jogo = jogo;
 	}
 
+	public Long getId() {
+		return id;
+	}
 	
+	public Jogo getJogo() {
+		return jogo;
+	}
+	
+	public Participante getRemetente() {
+		return remetente;
+	}
+	
+	public Participante getDestinatario() {
+		return destinatario;
+	}
+	
+	public Date getData() {
+		return data;
+	}
+	
+	public String getTexto() {
+		return texto;
+	}
 }

@@ -2,6 +2,8 @@ package com.identidade;
 
 public interface ContextoAmigoSecreto {
 
+	RepositorioAvisos getRepositorioAvisos();
+	
 	RepositorioJogos getRepositorioJogos();
 	
 	RepositorioMensagens getRepositorioMensagens();

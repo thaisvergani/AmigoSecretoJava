@@ -48,4 +48,14 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 			.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Jogo> buscarTodosJogos() {
+		return em
+			.createQuery("SELECT * FROM Jogo")
+			.getResultList();
+	}
+	
+	
+
 }

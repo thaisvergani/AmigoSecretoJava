@@ -12,13 +12,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="SugestaoAmigoSecreto")
-@SequenceGenerator(name="SugestaoAmigoSecreto_Sequence", 
-sequenceName="fornecedor_produtos_seq", allocationSize=0, initialValue=1)
+@SequenceGenerator(name="SugestaoAmigoSecreto_Sequence", sequenceName="fornecedor_produtos_seq", allocationSize=0, initialValue=1)
 public class SugestaoAmigoSecreto {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, 
-		generator="SugestaoAmigoSecreto_Sequence")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SugestaoAmigoSecreto_Sequence")
 	private Long id;
 		
 	@ManyToOne
@@ -28,9 +26,7 @@ public class SugestaoAmigoSecreto {
 	@Column(name="descricao", length=255)
 	private String descricao;	
 
-	public SugestaoAmigoSecreto(
-			Participante participante,
-			String descricao) {
+	public SugestaoAmigoSecreto(Participante participante, String descricao) {
 		this.participante = participante;
 		this.descricao = descricao;
 	}
@@ -41,6 +37,14 @@ public class SugestaoAmigoSecreto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Participante getParticipante() {
+		return participante;
+	}
+	
+	public String getDescricao() {
+		return descricao;
 	}
 
 	@Override

@@ -12,6 +12,8 @@ import java.util.Random;
 import com.entidades.Amizade;
 import com.entidades.Jogo;
 import com.entidades.Participante;
+import com.entidades.SugestaoAmigoSecreto;
+import com.entidades.SugestaoPresente;
 import com.identidade.ContextoAmigoSecreto;
 
 public class ServicoJogos extends ServicoBase {
@@ -27,7 +29,7 @@ public class ServicoJogos extends ServicoBase {
 	public Jogo criarNovo(Date fim, String nome) throws ExcecaoValidacaoServico {
 		List<Participante> participantes = contexto.getRepositorioParticipantes().buscarTodosParticipantes();
 		if (participantes.size() < 3) {
-			throw new ExcecaoValidacaoServico("Necessário possuir pelo menos 3 participantes para criar um amigo secreto");
+			throw new ExcecaoValidacaoServico("Necessario possuir pelo menos 3 participantes para criar um amigo secreto");
 		}
 		
 		if (nome == null) {
@@ -51,9 +53,50 @@ public class ServicoJogos extends ServicoBase {
 		return jogo;
 	}
 	
+	public SugestaoPresente cadastrarSugestaoPresente(Jogo jogo, Participante participante, String descricao) throws ExcecaoValidacaoServico {
+		if (jogo == null) {
+			throw new ExcecaoValidacaoServico("Necessario informar qual o jogo que essa sugestao pertence");
+		}
+		
+		if (participante == null) {
+			throw new ExcecaoValidacaoServico("Necessario informar qual o participante que fez a sugestao");
+		}
+		
+		if (descricao == null || descricao == "") {
+			throw new ExcecaoValidacaoServico("Necessario informar a descricao do presente que deseja sugerir");
+		}
+		
+		
+		SugestaoPresente sugestao = new SugestaoPresente(jogo, participante, descricao);
+		contexto.getRepositorioSugestoesPresentes().adicionar(sugestao);
+		return sugestao;
+	}
+	
+	public List<SugestaoPresente> buscarSugestaoPresentes(Participante participante) {
+		return contexto.getRepositorioSugestoesPresentes().buscarSugestoes(participante);
+	}
+	
+	public SugestaoAmigoSecreto cadastrarSugestaoJogo(Participante participante, String mensagem) throws ExcecaoValidacaoServico {
+		if (participante == null) {
+			throw new ExcecaoValidacaoServico("Necessario informar qual o participante que fez a sugestao");
+		}
+		
+		if (mensagem == null || mensagem == "") {
+			throw new ExcecaoValidacaoServico("Necessario informar a mensagem que deseja sugerir para os proximos jogos");
+		}
+		
+		SugestaoAmigoSecreto sugestao = new SugestaoAmigoSecreto(participante, mensagem);
+		contexto.getRepositorioSugestoesJogos().adicionar(sugestao);
+		return sugestao;
+	}
+	
+	public List<SugestaoAmigoSecreto> buscarTodasSugestoesJogo() {
+		return contexto.getRepositorioSugestoesJogos().buscarTodasSugestoes();
+	}
+	
 	private List<Amizade> sorteio(Jogo jogo, List<Participante> participantes, List<Jogo> ultimosJogos) {
 		
-		// Se tivermos mais jogos do que participantes não tem como evitar a repetição de amizades 
+		// Se tivermos mais jogos do que participantes nao tem como evitar a repeticao de amizades 
 		while (participantes.size() < ultimosJogos.size() - 1) {
 			ultimosJogos.remove(ultimosJogos.size() - 1);
 		}

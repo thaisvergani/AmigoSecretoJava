@@ -11,33 +11,19 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Participante")
-@SequenceGenerator(name = "Participante_Sequence", sequenceName = "participante_seq", allocationSize = 0, initialValue = 1)
-public class Participante implements Serializable {
+@Table(name = "Aviso")
+@SequenceGenerator(name = "Aviso_Sequence", sequenceName = "aviso_seq", allocationSize = 0, initialValue = 1)
+public class Aviso implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Participante_Sequence")
 	private Long id;
-
-	@Column(name = "nome", length = 60)
-	private String nome;
 	
-	@Column(name = "codinome", length = 60)
-	private String codinome;
+	@Column(name="texto", nullable=false)
+	private String mensagem;
 	
-	@Column(name = "ramal", nullable = true)
-	private int ramal;
-	
-	public Participante() {
-		
-	}
-
-	public Participante(String nome) {
-		this.nome = nome;	
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -45,31 +31,15 @@ public class Participante implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	
+	public String getMensagem() {
+		return mensagem;
 	}
 	
-	public String getCodinome() {
-		return codinome;
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 	
-	public void setCodinome(String codinome) {
-		this.codinome = codinome;
-	}
-	
-	public int getRamal() {
-		return ramal;
-	}
-	
-	public void setRamal(int ramal) {
-		this.ramal = ramal;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -86,11 +56,10 @@ public class Participante implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Participante other = (Participante) obj;
+		Aviso other = (Aviso) obj;
 		if (id != other.id)
 			return false;
 		return true;
 	}
-
-
 }
+	

@@ -41,7 +41,7 @@ public class ServicoParticipantes extends ServicoBase {
 		
 		Participante participante = contexto.getRepositorioParticipantes().buscaPorId(id);
 		if (participante == null) {
-			throw new ExcecaoValidacaoServico("Participante não encontrado");
+			throw new ExcecaoValidacaoServico("Participante nao encontrado");
 		}
 		
 		participante.setNome(nome);

@@ -1,9 +1,6 @@
 package com.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,14 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="SugestaoPresente")
-@SequenceGenerator(name="SugestaoPresente_Sequence", 
-sequenceName="sugestao_presente_seq", allocationSize=0, initialValue=1)
+@SequenceGenerator(name="SugestaoPresente_Sequence", sequenceName="sugestao_presente_seq", allocationSize=0, initialValue=1)
 public class SugestaoPresente implements Serializable {
 	
 	/**
