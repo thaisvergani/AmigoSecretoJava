@@ -18,7 +18,7 @@ public class Aviso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Participante_Sequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Aviso_Sequence")
 	private Long id;
 	
 	@Column(name="texto", nullable=false)

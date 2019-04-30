@@ -55,16 +55,9 @@
 	</target>
 	
 	<target name="run" depends="jar">
-		<java classname="com.testes.TesteJPA" fork="true">
+		<java classname="com.gui.Principal" fork="true">
 			<classpath refid="classpath.base" />
 		</java>
 	</target>
 	
-	<target name="testador" depends="jar">
-			<java classname="com.gui.TestadorDeEJBQL" fork="true">
-				<classpath refid="classpath.base" />
-			</java>
-	</target>
-	
-
 </project>

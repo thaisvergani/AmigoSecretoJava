@@ -1,7 +1,6 @@
 package com.entidades;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +25,7 @@ public class Amizade implements Serializable {
 	private Long id;
 	
 	@ManyToOne
-	@Column(name="jogo", length=60)
+	@JoinColumn(name="jogo")
 	private Jogo jogo;
 	
 	@ManyToOne

@@ -23,7 +23,8 @@ public class Mensagem implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Mensagem_Sequence")
 	private Long id;
 	
-	@Column(name="jogo", length=60, nullable=true )
+	@ManyToOne
+	@JoinColumn(name="jogo", nullable=true )
 	private Jogo jogo;
 	
 	@Column(name="texto", nullable=false)
