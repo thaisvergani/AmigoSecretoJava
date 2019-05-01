@@ -2,15 +2,21 @@ package com.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.entidades.Participante;
 import com.identidade.RepositorioParticipantes;
 
 public class RepositorioDAOParticipantes extends RepositorioDAOBase<Participante, Long> implements RepositorioParticipantes {
 	
+	public RepositorioDAOParticipantes(EntityManager entityManager) {
+		super(entityManager);
+	}
+
 	@Override
 	public Participante buscarParticipante(String nomeOuCodinome) {
 		Object participante = em
-			.createQuery("SELECT * FROM Participante p WHERE p.nome = :nome OR p.codinome = :nome")
+			.createQuery("SELECT p FROM Participante p WHERE p.nome = :nome OR p.codinome = :nome")
 			.setParameter("nome", nomeOuCodinome)
 			.getSingleResult();
 		
@@ -25,7 +31,7 @@ public class RepositorioDAOParticipantes extends RepositorioDAOBase<Participante
 	@Override
 	public List<Participante> buscarTodosParticipantes() {
 		return em
-			.createQuery("SELECT * FROM Participante")
+			.createQuery("SELECT p FROM Participante p")
 			.getResultList();		
 	}
 }

@@ -2,12 +2,18 @@ package com.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.entidades.Jogo;
 import com.entidades.Participante;
 import com.entidades.SugestaoPresente;
 import com.identidade.RepositorioSugestoesPresentes;
 
 public class RepositorioDAOSugestoesPresentes extends RepositorioDAOBase<SugestaoPresente, Long> implements RepositorioSugestoesPresentes {
+
+	public RepositorioDAOSugestoesPresentes(EntityManager entityManager) {
+		super(entityManager);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

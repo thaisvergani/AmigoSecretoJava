@@ -3,26 +3,29 @@ package com.dao;
 import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import com.identidade.Repositorio;
 
 public abstract class RepositorioDAOBase<T, K> implements Repositorio<T, K> {
 
 	protected Class<T> entityClass;
-	 
-	@PersistenceContext(name="AmigoSecreto")
-	protected EntityManager em;
+	 	
+	protected EntityManager em;			
 		
 	@SuppressWarnings("unchecked")
-	public RepositorioDAOBase() {
+	public RepositorioDAOBase(EntityManager entityManager) {
+		if (entityManager == null) {
+			throw new IllegalArgumentException("Necessario informar o entity manager da aplicacao");
+		}
+		
+		em = entityManager;
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
 		this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[1];
 	}
 	
 	@Override
 	public void adicionar(T entidade) {
-		try {
+		try {			
 			em.getTransaction().begin();
 			em.persist(entidade);
 			em.getTransaction().commit();

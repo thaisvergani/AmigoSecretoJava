@@ -60,4 +60,16 @@
 		</java>
 	</target>
 	
+	<target name="test-connection" depends="jar">
+		<java classname="com.testes.TesteConexao" fork="true">
+			<classpath refid="classpath.base" />
+		</java>
+	</target>
+	
+	<target name="test" depends="jar">
+		<java classname="com.testes.TesteJPA" fork="true">
+			<classpath refid="classpath.base" />
+		</java>
+	</target>
+	
 </project>

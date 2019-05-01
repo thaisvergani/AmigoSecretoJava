@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.entidades.Participante;
 import com.identidade.ContextoAmigoSecreto;
+import com.identidade.RepositorioParticipantes;
 
-public class ServicoParticipantes extends ServicoBase {
+public class ServicoParticipantes extends ServicoBase<Participante, Long> {
 
 	public ServicoParticipantes(ContextoAmigoSecreto contexto) {
-		super(contexto);
+		super(contexto, contexto.getRepositorioParticipantes());
 	}
 	
 	public Participante adicionar(String nome, String codinome, int ramal) throws ExcecaoValidacaoServico {
@@ -25,7 +26,7 @@ public class ServicoParticipantes extends ServicoBase {
 		participante.setCodinome(codinome);
 		participante.setRamal(ramal);
 		
-		contexto.getRepositorioParticipantes().adicionar(participante);
+		repositorio.adicionar(participante);
 		
 		return participante;
 	}
@@ -48,13 +49,13 @@ public class ServicoParticipantes extends ServicoBase {
 		participante.setCodinome(codinome);
 		participante.setRamal(ramal);
 		
-		contexto.getRepositorioParticipantes().atualizar(participante);
+		repositorio.atualizar(participante);
 		
 		return participante;
 	}
 
 	public List<Participante> buscarTodos() {
-		return contexto.getRepositorioParticipantes().buscarTodosParticipantes();
+		return ((RepositorioParticipantes)repositorio).buscarTodosParticipantes();
 	}	
 	
 }
