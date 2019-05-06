@@ -3,12 +3,18 @@ package com.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.entidades.Jogo;
 import com.entidades.Amizade;
 import com.identidade.RepositorioJogos;
 
 public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implements RepositorioJogos {
 	
+	public RepositorioDAOJogos(EntityManager entityManager) {
+		super(entityManager);
+	}
+
 	public void persistirAmizadesDoJogo(List<Amizade> amizades) {
 		if (amizades == null || amizades.size() == 0) {
 			return;
@@ -43,7 +49,7 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 	@Override
 	public List<Jogo> buscarUltimosJogos(int quantidade) {
 		return em
-			.createQuery("SELECT * FROM Jogo j ORDER BY j.inicio DESC LIMIT :qty")
+			.createQuery("SELECT j FROM Jogo j ORDER BY j.inicio DESC LIMIT :qty")
 			.setParameter("qty", quantidade)
 			.getResultList();
 	}
@@ -52,7 +58,7 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 	@Override
 	public List<Jogo> buscarTodosJogos() {
 		return em
-			.createQuery("SELECT * FROM Jogo")
+			.createQuery("SELECT j FROM Jogo j")
 			.getResultList();
 	}
 	

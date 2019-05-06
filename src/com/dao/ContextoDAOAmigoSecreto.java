@@ -1,5 +1,9 @@
 package com.dao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import com.identidade.ContextoAmigoSecreto;
 import com.identidade.RepositorioAvisos;
 import com.identidade.RepositorioJogos;
@@ -18,12 +22,15 @@ public class ContextoDAOAmigoSecreto implements ContextoAmigoSecreto {
 	private RepositorioSugestoesPresentes repositorioSugestoesPresentes;
 	
 	public ContextoDAOAmigoSecreto() {
-		this.repositorioAvisos = new RepositorioDAOAvisos();
-		this.repositorioJogos = new RepositorioDAOJogos();
-		this.repositorioMensagens = new RepositorioDAOMensagens();
-		this.repositorioParticipantes = new RepositorioDAOParticipantes();
-		this.repositorioSugestoesJogos = new RepositorioDAOSugestoesJogos();
-		this.repositorioSugestoesPresentes = new RepositorioDAOSugestoesPresentes();
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("AmigoSecreto");
+		EntityManager em = emf.createEntityManager();
+		
+		this.repositorioAvisos = new RepositorioDAOAvisos(em);
+		this.repositorioJogos = new RepositorioDAOJogos(em);
+		this.repositorioMensagens = new RepositorioDAOMensagens(em);
+		this.repositorioParticipantes = new RepositorioDAOParticipantes(em);
+		this.repositorioSugestoesJogos = new RepositorioDAOSugestoesJogos(em);
+		this.repositorioSugestoesPresentes = new RepositorioDAOSugestoesPresentes(em);
 	}
 	
 	@Override

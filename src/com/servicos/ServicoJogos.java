@@ -17,11 +17,12 @@ import com.entidades.ParticipanteMensagens;
 import com.entidades.SugestaoAmigoSecreto;
 import com.entidades.SugestaoPresente;
 import com.identidade.ContextoAmigoSecreto;
+import com.identidade.RepositorioJogos;
 
-public class ServicoJogos extends ServicoBase {
+public class ServicoJogos extends ServicoBase<Jogo, Long> {
 
 	public ServicoJogos(ContextoAmigoSecreto contexto) {
-		super(contexto);
+		super(contexto, contexto.getRepositorioJogos());
 	}
 	
 	public Jogo criarNovo(Date fim) throws ExcecaoValidacaoServico {
@@ -39,18 +40,18 @@ public class ServicoJogos extends ServicoBase {
 			nome = "Amigo Secreto dia " +  formatter.format(fim);			
 		}
 		
-		List<Jogo> ultimosJogos = contexto.getRepositorioJogos().buscarUltimosJogos(4);
+		List<Jogo> ultimosJogos = ((RepositorioJogos)repositorio).buscarUltimosJogos(4);
 		
 		Jogo jogo = new Jogo();		
 		jogo.setNome(nome);
 		jogo.setInicio(new Date());
 		jogo.setFim(fim);
 		
-		contexto.getRepositorioJogos().adicionar(jogo);
+		repositorio.adicionar(jogo);
 		
 		List<Amizade> amizadesJogo = sorteio(jogo, participantes, ultimosJogos);
-		
-		contexto.getRepositorioJogos().persistirAmizadesDoJogo(amizadesJogo);
+				
+		((RepositorioJogos)repositorio).persistirAmizadesDoJogo(amizadesJogo);
 		
 		return jogo;
 	}
@@ -146,7 +147,7 @@ public class ServicoJogos extends ServicoBase {
 		Map<Long, List<Long>> amizadesDosUltimosJogos = new HashMap<Long, List<Long>>();
 		
 		for (Jogo j : ultimosJogos) {
-			for (Amizade a : contexto.getRepositorioJogos().buscarAmizadesDoJogo(j)) {
+			for (Amizade a : ((RepositorioJogos)repositorio).buscarAmizadesDoJogo(j)) {
 				Long idParticipante = a.getParticipante().getId();
 				List<Long> ultimasAmizadesParticipante = amizadesDosUltimosJogos.get(idParticipante);
 				if (ultimasAmizadesParticipante == null) {

@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.entidades.Aviso;
 import com.identidade.ContextoAmigoSecreto;
+import com.identidade.RepositorioAvisos;
 
-public class ServicoAvisos extends ServicoBase {
+public class ServicoAvisos extends ServicoBase<Aviso, Long> {
 
 	public ServicoAvisos(ContextoAmigoSecreto contexto) {
-		super(contexto);
+		super(contexto, contexto.getRepositorioAvisos());
 	}
 	
 	public Aviso cadastrar(String mensagem) throws ExcecaoValidacaoServico {
@@ -20,13 +21,12 @@ public class ServicoAvisos extends ServicoBase {
 		Aviso aviso = new Aviso();
 		aviso.setMensagem(mensagem);
 		
-		contexto.getRepositorioAvisos().adicionar(aviso);
+		repositorio.adicionar(aviso);
 		
 		return aviso;
 	}
 	
 	public List<Aviso> buscarTodos() {
-		return contexto.getRepositorioAvisos().buscarTodosAvisos();
-	}
-	
+		return ((RepositorioAvisos)repositorio).buscarTodosAvisos();
+	}	
 }

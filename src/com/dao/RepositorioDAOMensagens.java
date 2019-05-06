@@ -3,12 +3,18 @@ package com.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import com.entidades.Jogo;
 import com.entidades.Mensagem;
 import com.entidades.ParticipanteMensagens;
 import com.identidade.RepositorioMensagens;
 
 public class RepositorioDAOMensagens extends RepositorioDAOBase<Mensagem, Long> implements RepositorioMensagens {
+
+	public RepositorioDAOMensagens(EntityManager entityManager) {
+		super(entityManager);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
