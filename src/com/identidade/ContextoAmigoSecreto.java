@@ -13,4 +13,6 @@ public interface ContextoAmigoSecreto {
 	RepositorioSugestoesJogos getRepositorioSugestoesJogos();
 	
 	RepositorioSugestoesPresentes getRepositorioSugestoesPresentes();
+
+	RepositorioAmizades getRepositorioAmizades();
 }

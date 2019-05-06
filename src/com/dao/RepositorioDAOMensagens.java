@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 import com.entidades.Jogo;
 import com.entidades.Mensagem;
+import com.entidades.Participante;
 import com.entidades.ParticipanteMensagens;
 import com.identidade.RepositorioMensagens;
 
@@ -15,6 +16,7 @@ public class RepositorioDAOMensagens extends RepositorioDAOBase<Mensagem, Long> 
 	public RepositorioDAOMensagens(EntityManager entityManager) {
 		super(entityManager);
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -27,6 +29,21 @@ public class RepositorioDAOMensagens extends RepositorioDAOBase<Mensagem, Long> 
 			.createQuery("SELECT m FROM Mensagem m JOIN m.jogo j WHERE j.id = :idJogo")
 			.setParameter("idJogo", jogo.getId())
 			.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int totalMensagens(Jogo jogo) {
+		if (jogo == null) {
+			return 0;
+		}
+		
+		List<Mensagem> lista = em
+				.createQuery("SELECT m FROM Mensagem m JOIN m.jogo j WHERE j.id = :idJogo")
+				.setParameter("idJogo", jogo.getId())
+				.getResultList();
+		return lista.size();
+				
 	}
 
 	@SuppressWarnings("unchecked")

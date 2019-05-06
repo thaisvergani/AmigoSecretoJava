@@ -49,27 +49,44 @@ public class Mensagem implements Serializable {
 		this.jogo = jogo;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	
 	public Jogo getJogo() {
 		return jogo;
 	}
-	
-	public Participante getRemetente() {
-		return remetente;
+
+	public void setJogo(Jogo jogo) {
+		this.jogo = jogo;
 	}
-	
-	public Participante getDestinatario() {
-		return destinatario;
-	}
-	
-	public Date getData() {
-		return data;
-	}
-	
+
 	public String getTexto() {
 		return texto;
 	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Participante getDestinatario() {
+		return destinatario;
+	}
+
+	public void setDestinatario(Participante destinatario) {
+		this.destinatario = destinatario;
+	}
+
+	public Participante getRemetente() {
+		return remetente;
+	}
+
+	public void setRemetente(Participante remetente) {
+		this.remetente = remetente;
+	}
+
 }

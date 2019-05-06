@@ -29,6 +29,11 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		return criarNovo(fim, null);
 	}
 	
+	public Jogo buscarJogoAtual()  throws ExcecaoValidacaoServico {
+		List<Jogo> ultimosJogos = ((RepositorioJogos)repositorio).buscarUltimosJogos(1);
+		return ultimosJogos.get(0);
+	}
+	
 	public Jogo criarNovo(Date fim, String nome) throws ExcecaoValidacaoServico {
 		List<Participante> participantes = contexto.getRepositorioParticipantes().buscarTodosParticipantes();
 		if (participantes.size() < 3) {
@@ -176,5 +181,10 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		// todo: gerar codinomes
 		
 		return amizades;
+	}
+	
+	public Participante buscarAmigoSecreto(Jogo jogo, Participante participante) {
+		Participante amigo = contexto.getRepositorioAmizades().buscarAmigo(jogo, participante);
+		return amigo;
 	}
 }

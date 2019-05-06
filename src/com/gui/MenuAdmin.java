@@ -11,6 +11,7 @@ public class MenuAdmin implements Menu {
 	private ServicoAvisos servicoAvisos;
 	private ServicoJogos servicoJogos;
 	private ServicoParticipantes servicoParticipantes;	
+	private ServicoParticipantes servicoMensagen;	
 	
 	public MenuAdmin(ContextoAmigoSecreto contexto) {
 		if (contexto == null) {
@@ -20,6 +21,7 @@ public class MenuAdmin implements Menu {
 		servicoAvisos = new ServicoAvisos(contexto);
 		servicoJogos = new ServicoJogos(contexto);
 		servicoParticipantes = new ServicoParticipantes(contexto);
+		servicoParticipantes = new ServicoParticipantes(contexto);
 	}
 	
 	@Override
@@ -28,20 +30,18 @@ public class MenuAdmin implements Menu {
 		int opcao = -1;
 		while (opcao != 0) {
 			Escritor.EscreverLinha("1 - Cadastrar Participante");
-			Escritor.EscreverLinha("1.1 - Listar Participantes");			
-
-			Escritor.EscreverLinha("2 - Cadastrar Sugest√£o de Presente");
+			Escritor.EscreverLinha("2 - Listar Participantes");			
 			Escritor.EscreverLinha("3 - Sortear Novo Jogo");			
 			Escritor.EscreverLinha("4 - Cadastrar Mensagens");			
 			Escritor.EscreverLinha("5 - Listar Mensagens");			
-			Escritor.EscreverLinha("6 - Cadastrar Sugest√µes de Presente");			
-			Escritor.EscreverLinha("7 - Listar Sugest√µes de Presente de um Participante");			
-			Escritor.EscreverLinha("8 - Cadastrar Sugest√µes Gerais");			
-			Escritor.EscreverLinha("9 - Listar Sugest√µes Gerais");			
+			Escritor.EscreverLinha("6 - Cadastrar Sugestıes de Presente");			
+			Escritor.EscreverLinha("7 - Listar Sugestıes de Presente de um Participante");			
+			Escritor.EscreverLinha("8 - Cadastrar Sugestıes Gerais");			
+			Escritor.EscreverLinha("9 - Listar Sugestıes Gerais");			
 			Escritor.EscreverLinha("10 - Cadastrar Avisos Gerais");			
 			Escritor.EscreverLinha("11 - Listar Avisos Gerais");	
-			Escritor.EscreverLinha("12 - Relat√≥rios de Mensagens Enviadas e Recebidas");			
-			Escritor.EscreverLinha("13 - Relat√≥rios de Amizades");			
+			Escritor.EscreverLinha("12 - RelatÛrios de Mensagens Enviadas e Recebidas");			
+			Escritor.EscreverLinha("13 - RelatÛrios de Amizades");			
 			Escritor.EscreverLinha("0 - Sair");
 
 			opcao = Leitor.lerInt();
