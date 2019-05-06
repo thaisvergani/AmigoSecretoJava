@@ -172,6 +172,7 @@ public class ServicoJogos extends ServicoBase {
 			amizade.setAmigoSecreto(amigoSecreto);
 			participantes.remove(amigoSecreto);	
 		}
+		// todo: gerar codinomes
 		
 		return amizades;
 	}

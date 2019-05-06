@@ -7,7 +7,8 @@ public class Principal {
 
 	public static void main(String[] args) {
 		ContextoAmigoSecreto contexto = new ContextoDAOAmigoSecreto();		
-		new MenuInicial(contexto).entrar();		
+		// login
+		new MenuParticipante(contexto).entrar();		
 	}
 	
 	
