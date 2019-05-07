@@ -54,6 +54,21 @@ public class RepositorioDAOAmizades extends RepositorioDAOBase<Amizade, Long> im
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Amizade> buscarAmizadesDoJogo(Jogo jogo) {
+		if (jogo == null) {
+			return new ArrayList<Amizade>();
+		}
+		
+		return em
+			.createQuery("SELECT a FROM Amizade a JOIN a.jogo j JOIN a.amigoSecreto p1 JOIN a.participante p2 WHERE j.id = :idJogo")
+			.setParameter("idJogo", jogo.getId())
+			.getResultList();
+		
+		// TODO isso vai retornar os objetos de participante também??
+	}
+	
 	
 
 }

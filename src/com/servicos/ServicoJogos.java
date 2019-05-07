@@ -1,5 +1,6 @@
 package com.servicos;
 
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -191,7 +192,16 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 			amizade.setAmigoSecreto(amigoSecreto);
 			participantes.remove(amigoSecreto);	
 		}
-		// todo: gerar codinomes
+
+		for (Participante p: participantes) {
+
+		    byte[] array = new byte[7]; // length is bounded by 7
+		    new Random().nextBytes(array);
+		    String codinome = new String(array, Charset.forName("UTF-8"));
+		    p.setCodinome(codinome); 
+		    contexto.getRepositorioParticipantes().atualizar(p);
+
+		}
 		
 		return amizades;
 	}
@@ -199,5 +209,9 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 	public Participante buscarAmigoSecreto(Jogo jogo, Participante participante) {
 		Participante amigo = contexto.getRepositorioAmizades().buscarAmigo(jogo, participante);
 		return amigo;
+	}
+
+	public List<Amizade> historicoAmizades(Jogo j) {
+		return contexto.getRepositorioAmizades().buscarAmizadesDoJogo(j);
 	}
 }

@@ -2,6 +2,7 @@ package com.gui;
 
 import java.util.List;
 
+import com.entidades.Amizade;
 import com.entidades.Aviso;
 import com.entidades.Jogo;
 import com.entidades.Mensagem;
@@ -176,7 +177,11 @@ public class MenuParticipante implements Menu {
 				Console.escreverLinha(p.getNome());	
 			}
 //			Console.escreverLinha("\t Lista dos codinomes, com seus respectivos participantes:");	
-//			Console.escreverLinha("\t Lista de quem tirou quem:");	
+			Console.escreverLinha("\t Lista de quem tirou quem:");	
+			List<Amizade> amizades = servicoJogos.historicoAmizades(j);		
+			for (Amizade a : amizades) {
+				Console.escreverLinha(a.getParticipante().getNome() + a.getAmigoSecreto().getNome());	
+			}
 		}
 	}
 
