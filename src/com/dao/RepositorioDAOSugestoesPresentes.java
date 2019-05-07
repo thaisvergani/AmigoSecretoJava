@@ -24,4 +24,12 @@ public class RepositorioDAOSugestoesPresentes extends RepositorioDAOBase<Sugesta
 			.setParameter("idJogo", jogo.getId())
 			.getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SugestaoPresente> buscarTodasSugestoes() {
+		return em
+			.createQuery("SELECT sp FROM SugestaoPresente sp JOIN sp.participante p JOIN sp.jogo j")
+			.getResultList();
+	}
 }

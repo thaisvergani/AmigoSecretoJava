@@ -9,6 +9,7 @@ import com.entidades.ParticipanteMensagens;
 
 public interface RepositorioMensagens extends Repositorio<Mensagem, Long> {
 	
+	List<Mensagem> buscarMensagensParticipante(Participante participante);
 	List<Mensagem> buscarMensagensDoJogo(Jogo jogo);
 	
 	int totalMensagens(Jogo jogo);

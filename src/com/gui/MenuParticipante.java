@@ -1,6 +1,10 @@
 package com.gui;
 
+import java.util.List;
+
+import com.entidades.Aviso;
 import com.entidades.Jogo;
+import com.entidades.Mensagem;
 import com.entidades.Participante;
 import com.identidade.ContextoAmigoSecreto;
 import com.servicos.ExcecaoValidacaoServico;
@@ -8,6 +12,7 @@ import com.servicos.ServicoAvisos;
 import com.servicos.ServicoJogos;
 import com.servicos.ServicoParticipantes;
 import com.servicos.ServicoSugestoesJogo;
+import com.servicos.ServicoSugestoesPresente;
 import com.servicos.ServicoMensagens;
 
 
@@ -20,6 +25,7 @@ public class MenuParticipante implements Menu {
 	private ServicoParticipantes servicoParticipantes;	
 	private ServicoMensagens servicoMensagens;	
 	private ServicoSugestoesJogo servicoSugestaoesJogo;
+	private ServicoSugestoesPresente servicoSugestoesPresente;
 	
 	public MenuParticipante(ContextoAmigoSecreto contexto, String nome_user) {
 		if (contexto == null) {
@@ -48,11 +54,11 @@ public class MenuParticipante implements Menu {
 		while (opcao != 0) {
 			Escritor.EscreverLinha("1 - Ver Amigo Atual");
 			Escritor.EscreverLinha("2 - Alterar Codinome");			
-			Escritor.EscreverLinha("3 - Cadastrar Sugestões");			
+			Escritor.EscreverLinha("3 - Cadastrar Sugestões de presente");			
 			Escritor.EscreverLinha("4 - Enviar Mensagem");			
 			Escritor.EscreverLinha("5 - Ler Mensagens");			
 			Escritor.EscreverLinha("6 - Ler Avisos");
-			Escritor.EscreverLinha("7 - Enviar Sugestão");			
+			Escritor.EscreverLinha("7 - Enviar Sugestão para os jogos");			
 			Escritor.EscreverLinha("8 - Demonstrativos dos jogos");			
 		
 			Escritor.EscreverLinha("0 - Sair");
@@ -69,14 +75,19 @@ public class MenuParticipante implements Menu {
 						alterarCodinome();
 						break;
 					case 3:
-						enviarSugestao();
+						enviarSugestaoPresente();
 						break;
 					case 4:
-						enviarMensagem();
-					
+						enviarMensagem();					
 						break;
 					case 5:
-						
+						lerMensagens();
+						break;
+					case 6:
+						lerAvisos();
+						break;
+					case 7:
+						enviarSugestaoJogo();
 						break;
 					default:
 						Escritor.EscreverLinha("Opção inválida");		
@@ -91,6 +102,7 @@ public class MenuParticipante implements Menu {
 	public void verAmigoAtual() {
 		Participante amigo = servicoJogos.buscarAmigoSecreto(jogoAtual, participanteAtual);
 		Escritor.EscreverLinha("Seu amigo secreto atual é:");
+		//todo mostrar a sugestao de presente do amigo
 		Escritor.EscreverLinha(amigo.getNome());
 	}
 	public void alterarCodinome() throws ExcecaoValidacaoServico {
@@ -104,21 +116,39 @@ public class MenuParticipante implements Menu {
 				0);
 		participanteAtual = participanteAtualizado;
 	}
-	public void enviarSugestao() throws ExcecaoValidacaoServico {
+	public void enviarSugestaoJogo() throws ExcecaoValidacaoServico {
 		Escritor.EscreverLinha("Deixe sua sugestão para o jogo:");
 		String mensagem = Leitor.ler();
-
 		servicoSugestaoesJogo.cadastrar(participanteAtual, mensagem);
+	}
+	
+	public void enviarSugestaoPresente() throws ExcecaoValidacaoServico {
+		Escritor.EscreverLinha("Informe sua sugestão de presente:");
+		String sugestao = Leitor.ler();
+		servicoSugestoesPresente.cadastrar(jogoAtual, participanteAtual, sugestao);
+	}
+	
+	public void lerMensagens() throws ExcecaoValidacaoServico {
+		List<Mensagem> mensagens = servicoMensagens.buscarMensagensParticipante( participanteAtual);
+		
+		for (Mensagem m : mensagens) {
+			System.out.println(m.getRemetente().getCodinome() + " - " + m.getData() + " - " + m.getTexto());
+		}
+	}
+	
+	public void lerAvisos() throws ExcecaoValidacaoServico {
 
+		List<Aviso> avisos = servicoAvisos.buscarTodos();
+					
+		for (Aviso a : avisos) {
+			System.out.println(a.getId() + " - " + a.getMensagem());
+		}
 	}
 	
 	public void enviarMensagem() throws ExcecaoValidacaoServico {
 		Escritor.EscreverLinha("Digite a Mensagem a ser enviada para seu amigo secreto");		
 		String texto = Leitor.ler();
-		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);
-	
-	
-		
+		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);		
 	}
 
 }

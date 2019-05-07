@@ -33,5 +33,10 @@ public class ServicoMensagens extends ServicoBase<Mensagem, Long> {
 	public List<Mensagem> buscarTodos() {
 		
 		return ((RepositorioMensagens)repositorio).buscarMensagensDoJogo(null);
+	}		
+	
+	public List<Mensagem> buscarMensagensParticipante( Participante participante) {
+		
+		return ((RepositorioMensagens)repositorio).buscarMensagensParticipante(participante);
 	}	
 }

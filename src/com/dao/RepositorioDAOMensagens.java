@@ -20,6 +20,19 @@ public class RepositorioDAOMensagens extends RepositorioDAOBase<Mensagem, Long> 
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public List<Mensagem> buscarMensagensParticipante(Participante participante) {
+		if (participante == null) {
+			return new ArrayList<Mensagem>();
+		}
+		
+		return em
+			.createQuery("SELECT m FROM Mensagem m JOIN m.destinatario p WHERE p.id = :idparticipante")
+			.setParameter("idparticipante", participante.getId())
+			.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<Mensagem> buscarMensagensDoJogo(Jogo jogo) {
 		if (jogo == null) {
 			return new ArrayList<Mensagem>();

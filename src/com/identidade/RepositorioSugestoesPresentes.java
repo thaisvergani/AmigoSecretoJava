@@ -9,5 +9,7 @@ import com.entidades.SugestaoPresente;
 public interface RepositorioSugestoesPresentes extends Repositorio<SugestaoPresente, Long> {
 	
 	List<SugestaoPresente> buscarSugestoes(Participante participante, Jogo jogo);
+
+	List<SugestaoPresente> buscarTodasSugestoes();
 	
 }
