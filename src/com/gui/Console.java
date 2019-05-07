@@ -14,7 +14,6 @@ public class Console {
 	}
 
 	public static String ler() {
-		limpar();
 		return _scanner.next();
 	}
 
