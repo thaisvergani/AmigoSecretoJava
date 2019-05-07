@@ -52,7 +52,7 @@ public class MenuParticipante implements Menu {
 		}
 		participanteAtual = contexto.getRepositorioParticipantes().buscarParticipante(nome_user);
 
-		amigoSecreto = contexto.getRepositorioParticipantes().buscarParticipante(nome_user);
+		amigoSecreto = servicoJogos.buscarAmigoSecreto(jogoAtual, participanteAtual);
 	}
 	
 	@Override
@@ -112,11 +112,9 @@ public class MenuParticipante implements Menu {
 	}
 	
 	public void verAmigoAtual() {
-		Participante amigo = servicoJogos.buscarAmigoSecreto(jogoAtual, participanteAtual);
-
 		Console.escreverLinha("Seu amigo secreto atual:");
 				//todo mostrar a sugestao de presente do amigo
-		Console.escreverLinha(amigo.getNome());
+		Console.escreverLinha(amigoSecreto.getNome());
 	}
 	
 	public void alterarCodinome() throws ExcecaoValidacaoServico {
@@ -160,7 +158,7 @@ public class MenuParticipante implements Menu {
 	public void enviarMensagem() throws ExcecaoValidacaoServico {
 		Console.escreverLinha("Digite a Mensagem a ser enviada para seu amigo secreto");		
 		String texto = Console.lerLinha();
-		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);
+		servicoJogos.cadastrarMensagemParticipante(texto, participanteAtual, amigoSecreto, jogoAtual);
 	
 	
 		
