@@ -178,9 +178,11 @@ public class MenuParticipante implements Menu {
 			}
 //			Console.escreverLinha("\t Lista dos codinomes, com seus respectivos participantes:");	
 			Console.escreverLinha("\t Lista de quem tirou quem:");	
-			List<Amizade> amizades = servicoJogos.historicoAmizades(j);		
+			List<Amizade> amizades = servicoJogos.buscarAmizadesDoJogo(j);
 			for (Amizade a : amizades) {
-				Console.escreverLinha(a.getParticipante().getNome() + a.getAmigoSecreto().getNome());	
+				Console.escreverLinha(
+					a.getParticipante().getNome() + "(" + a.getParticipante().getCodinome() + ") -> " + 
+					a.getAmigoSecreto().getNome() + "(" + a.getAmigoSecreto().getCodinome() + ")");
 			}
 		}
 	}
