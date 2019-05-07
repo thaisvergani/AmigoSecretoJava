@@ -129,17 +129,14 @@ public class MenuParticipante implements Menu {
 	}
 	
 	public void lerMensagens() throws ExcecaoValidacaoServico {
-		List<Mensagem> mensagens = servicoMensagens.buscarMensagensParticipante( participanteAtual);
-		
+		List<Mensagem> mensagens = servicoMensagens.buscarMensagensParticipante( participanteAtual);		
 		for (Mensagem m : mensagens) {
 			System.out.println(m.getRemetente().getCodinome() + " - " + m.getData() + " - " + m.getTexto());
 		}
 	}
 	
 	public void lerAvisos() throws ExcecaoValidacaoServico {
-
-		List<Aviso> avisos = servicoAvisos.buscarTodos();
-					
+		List<Aviso> avisos = servicoAvisos.buscarTodos();					
 		for (Aviso a : avisos) {
 			System.out.println(a.getId() + " - " + a.getMensagem());
 		}
