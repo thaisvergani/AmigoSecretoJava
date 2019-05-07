@@ -52,17 +52,17 @@ public class MenuParticipante implements Menu {
 
 		int opcao = -1;
 		while (opcao != 0) {
-			Escritor.EscreverLinha("1 - Ver Amigo Atual");
-			Escritor.EscreverLinha("2 - Alterar Codinome");			
-			Escritor.EscreverLinha("3 - Cadastrar Sugestões de presente");			
-			Escritor.EscreverLinha("4 - Enviar Mensagem");			
-			Escritor.EscreverLinha("5 - Ler Mensagens");			
-			Escritor.EscreverLinha("6 - Ler Avisos");
-			Escritor.EscreverLinha("7 - Enviar Sugestão para os jogos");			
-			Escritor.EscreverLinha("8 - Demonstrativos dos jogos");			
+			Console.escreverLinha("1 - Ver Amigo Atual");
+			Console.escreverLinha("2 - Alterar Codinome");			
+			Console.escreverLinha("3 - Cadastrar Sugestï¿½es");			
+			Console.escreverLinha("4 - Enviar Mensagem");			
+			Console.escreverLinha("5 - Ler Mensagens");			
+			Console.escreverLinha("6 - Ler Avisos");
+			Console.escreverLinha("7 - Enviar Sugestï¿½o");			
+			Console.escreverLinha("8 - Demonstrativos dos jogos");			
 		
-			Escritor.EscreverLinha("0 - Sair");
-			opcao = Leitor.lerInt();
+			Console.escreverLinha("0 - Sair");
+			opcao = Console.lerInt();
 			try {
 
 				switch(opcao){
@@ -87,27 +87,30 @@ public class MenuParticipante implements Menu {
 						lerAvisos();
 						break;
 					case 7:
-						enviarSugestaoJogo();
+						enviarSugestao();
 						break;
 					default:
-						Escritor.EscreverLinha("Opção inválida");		
+						Console.escreverLinha("Opï¿½ï¿½o invï¿½lida");		
 	
 				}	
 			} catch (ExcecaoValidacaoServico e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Console.escreverLinha(e.getMessage());
 			}
 		}
 	}
+	
 	public void verAmigoAtual() {
 		Participante amigo = servicoJogos.buscarAmigoSecreto(jogoAtual, participanteAtual);
-		Escritor.EscreverLinha("Seu amigo secreto atual é:");
-		//todo mostrar a sugestao de presente do amigo
-		Escritor.EscreverLinha(amigo.getNome());
+
+		Console.escreverLinha("Seu amigo secreto atual ï¿½:");
+				//todo mostrar a sugestao de presente do amigo
+		Console.escreverLinha(amigo.getNome());
 	}
+	
 	public void alterarCodinome() throws ExcecaoValidacaoServico {
-		Escritor.EscreverLinha("Informe seu novo codinome:");
-		String novo_codinome = Leitor.ler();
+		Console.escreverLinha("Informe seu novo codinome:");
+		String novo_codinome = Console.ler();
 
 		Participante participanteAtualizado = servicoParticipantes.atualizar(
 				participanteAtual.getId(),
@@ -116,15 +119,17 @@ public class MenuParticipante implements Menu {
 				0);
 		participanteAtual = participanteAtualizado;
 	}
-	public void enviarSugestaoJogo() throws ExcecaoValidacaoServico {
-		Escritor.EscreverLinha("Deixe sua sugestão para o jogo:");
-		String mensagem = Leitor.ler();
+	
+	public void enviarSugestao() throws ExcecaoValidacaoServico {
+		Console.escreverLinha("Deixe sua sugestï¿½o para o jogo:");
+		String mensagem = Console.ler();
+
 		servicoSugestaoesJogo.cadastrar(participanteAtual, mensagem);
 	}
 	
 	public void enviarSugestaoPresente() throws ExcecaoValidacaoServico {
-		Escritor.EscreverLinha("Informe sua sugestão de presente:");
-		String sugestao = Leitor.ler();
+		Console.escreverLinha("Informe sua sugestï¿½o de presente:");
+		String sugestao = Console.ler();
 		servicoSugestoesPresente.cadastrar(jogoAtual, participanteAtual, sugestao);
 	}
 	
@@ -143,9 +148,12 @@ public class MenuParticipante implements Menu {
 	}
 	
 	public void enviarMensagem() throws ExcecaoValidacaoServico {
-		Escritor.EscreverLinha("Digite a Mensagem a ser enviada para seu amigo secreto");		
-		String texto = Leitor.ler();
-		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);		
+		Console.escreverLinha("Digite a Mensagem a ser enviada para seu amigo secreto");		
+		String texto = Console.ler();
+		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);
+	
+	
+		
 	}
 
 }
