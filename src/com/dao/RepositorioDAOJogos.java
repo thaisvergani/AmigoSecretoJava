@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.entidades.Jogo;
 import com.entidades.Amizade;
@@ -49,10 +50,15 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Jogo> buscarUltimosJogos(int quantidade) {
-		return em
+	
+		Query query = em
 			.createQuery("SELECT j FROM Jogo j ORDER BY j.inicio DESC LIMIT :qty")
-			.setParameter("qty", quantidade)
-			.getResultList();
+			.setParameter("qty", quantidade);
+		if(query != null) {
+			return query.getResultList();
+			} else {
+				return null;
+			}
 	}
 	
 	@SuppressWarnings("unchecked")

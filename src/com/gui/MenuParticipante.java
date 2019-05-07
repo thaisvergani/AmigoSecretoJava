@@ -19,7 +19,11 @@ import com.servicos.ServicoMensagens;
 
 
 public class MenuParticipante implements Menu {
-	private Participante participanteAtual;
+	public Participante participanteAtual;
+	public Participante getParticipanteAtual() {
+		return participanteAtual;
+	}
+
 	private Participante amigoSecreto;
 	private Jogo jogoAtual;
 	private ServicoAvisos servicoAvisos;
@@ -33,7 +37,7 @@ public class MenuParticipante implements Menu {
 		if (contexto == null) {
 			throw new IllegalArgumentException("Necessario passar o contexto da aplicacao");
 		}
-		
+
 		servicoAvisos = new ServicoAvisos(contexto);
 		servicoJogos = new ServicoJogos(contexto);
 		servicoParticipantes = new ServicoParticipantes(contexto);
@@ -46,6 +50,7 @@ public class MenuParticipante implements Menu {
 			e.printStackTrace();
 		}
 		participanteAtual = contexto.getRepositorioParticipantes().buscarParticipante(nome_user);
+
 		amigoSecreto = contexto.getRepositorioParticipantes().buscarParticipante(nome_user);
 	}
 	

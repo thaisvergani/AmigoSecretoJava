@@ -26,7 +26,8 @@ public class MenuAdmin implements Menu {
 		if (contexto == null) {
 			throw new IllegalArgumentException("Necessario passar o contexto da aplicacao");
 		}
-		
+		Console.escreverLinha("iniciando modo de admin");
+
 		servicoAvisos = new ServicoAvisos(contexto);
 		servicoJogos = new ServicoJogos(contexto);
 		servicoParticipantes = new ServicoParticipantes(contexto);
