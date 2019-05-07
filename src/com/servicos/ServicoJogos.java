@@ -148,6 +148,17 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		return mensagem;
 	}
 	
+	public Mensagem cadastrarMensagemParticipante(String texto, Participante remetente, Participante destinatario, Jogo jogo) throws ExcecaoValidacaoServico {
+		if (texto == null) {
+			throw new ExcecaoValidacaoServico("Necessario informar o texto que deseja enviar na mensagem");
+		}
+		
+		
+		Mensagem mensagem = new Mensagem(texto, new Date(), remetente, destinatario, jogo);
+		contexto.getRepositorioMensagens().adicionar(mensagem);
+		return mensagem;
+	}
+	
 	private List<Amizade> sorteio(Jogo jogo, List<Participante> participantes, List<Jogo> ultimosJogos) {
 		
 		// Se tivermos mais jogos do que participantes nao tem como evitar a repeticao de amizades 

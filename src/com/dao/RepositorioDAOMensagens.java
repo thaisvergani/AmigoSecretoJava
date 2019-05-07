@@ -26,8 +26,8 @@ public class RepositorioDAOMensagens extends RepositorioDAOBase<Mensagem, Long> 
 		}
 		
 		return em
-			.createQuery("SELECT m FROM Mensagem m JOIN m.destinatario p WHERE p.id = :idparticipante")
-			.setParameter("idparticipante", participante.getId())
+			.createQuery("SELECT m FROM Mensagem m  WHERE m.destinatario = :idparticipante")
+			.setParameter("idparticipante", participante)
 			.getResultList();
 	}
 
