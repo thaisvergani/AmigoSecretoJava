@@ -55,11 +55,11 @@ public class MenuParticipante implements Menu {
 		while (opcao != 0) {
 			Console.escreverLinha("1 - Ver Amigo Atual");
 			Console.escreverLinha("2 - Alterar Codinome");			
-			Console.escreverLinha("3 - Cadastrar Sugest�es");			
+			Console.escreverLinha("3 - Cadastrar Sugestoes");			
 			Console.escreverLinha("4 - Enviar Mensagem");			
 			Console.escreverLinha("5 - Ler Mensagens");			
 			Console.escreverLinha("6 - Ler Avisos");
-			Console.escreverLinha("7 - Enviar Sugest�o");			
+			Console.escreverLinha("7 - Enviar Sugestao");			
 			Console.escreverLinha("8 - Demonstrativos dos jogos");			
 		
 			Console.escreverLinha("0 - Sair");
@@ -94,7 +94,7 @@ public class MenuParticipante implements Menu {
 						demonstrativos();
 						break;
 					default:
-						Console.escreverLinha("Op��o inv�lida");		
+						Console.escreverLinha("Opcao invalida");		
 	
 				}	
 			} catch (ExcecaoValidacaoServico e) {
@@ -107,7 +107,7 @@ public class MenuParticipante implements Menu {
 	public void verAmigoAtual() {
 		Participante amigo = servicoJogos.buscarAmigoSecreto(jogoAtual, participanteAtual);
 
-		Console.escreverLinha("Seu amigo secreto atual �:");
+		Console.escreverLinha("Seu amigo secreto atual:");
 				//todo mostrar a sugestao de presente do amigo
 		Console.escreverLinha(amigo.getNome());
 	}
@@ -125,14 +125,14 @@ public class MenuParticipante implements Menu {
 	}
 	
 	public void enviarSugestao() throws ExcecaoValidacaoServico {
-		Console.escreverLinha("Deixe sua sugest�o para o jogo:");
+		Console.escreverLinha("Deixe sua sugestao para o jogo:");
 		String mensagem = Console.ler();
 
 		servicoSugestaoesJogo.cadastrar(participanteAtual, mensagem);
 	}
 	
 	public void enviarSugestaoPresente() throws ExcecaoValidacaoServico {
-		Console.escreverLinha("Informe sua sugest�o de presente:");
+		Console.escreverLinha("Informe sua sugestao de presente:");
 		String sugestao = Console.ler();
 		servicoSugestoesPresente.cadastrar(jogoAtual, participanteAtual, sugestao);
 	}
@@ -163,20 +163,20 @@ public class MenuParticipante implements Menu {
 		List<Jogo> jogos = servicoJogos.buscarJogosEncerrados();
 		for (Jogo j : jogos) {
 			
-			Escritor.EscreverLinha("Jogo:" + j.getNome());	
-			Escritor.EscreverLinha("\t Total de mensagens:" );	
-			Escritor.EscreverLinha("\t Ranking dos participantes que mais receberam mensagens:");	
+			Console.escreverLinha("Jogo:" + j.getNome());	
+			Console.escreverLinha("\t Total de mensagens:" );	
+			Console.escreverLinha("\t Ranking dos participantes que mais receberam mensagens:");	
 			List<ParticipanteMensagens> mais_receberam = servicoJogos.rankingRecebeuMaisMensagens(j);		
 			for (ParticipanteMensagens p : mais_receberam) {
-				Escritor.EscreverLinha(p.getNome());	
+				Console.escreverLinha(p.getNome());	
 			}
-			Escritor.EscreverLinha("\t Ranking dos participantes que mais enviaram mensagens:");	
+			Console.escreverLinha("\t Ranking dos participantes que mais enviaram mensagens:");	
 			List<ParticipanteMensagens> mais_enviaram = servicoJogos.rankingEnviouMaisMensagens(j);		
 			for (ParticipanteMensagens p : mais_enviaram) {
-				Escritor.EscreverLinha(p.getNome());	
+				Console.escreverLinha(p.getNome());	
 			}
-//			Escritor.EscreverLinha("\t Lista dos codinomes, com seus respectivos participantes:");	
-//			Escritor.EscreverLinha("\t Lista de quem tirou quem:");	
+//			Console.escreverLinha("\t Lista dos codinomes, com seus respectivos participantes:");	
+//			Console.escreverLinha("\t Lista de quem tirou quem:");	
 		}
 	}
 
