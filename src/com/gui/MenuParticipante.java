@@ -170,13 +170,13 @@ public class MenuParticipante implements Menu {
 			Console.escreverLinha("Jogo:" + j.getNome());	
 			Console.escreverLinha("\t Total de mensagens:" );	
 			Console.escreverLinha("\t Ranking dos participantes que mais receberam mensagens:");	
-			List<ParticipanteMensagens> mais_receberam = servicoJogos.rankingRecebeuMaisMensagens(j);		
-			for (ParticipanteMensagens p : mais_receberam) {
+			List<Participante> mais_receberam = servicoJogos.rankingRecebeuMaisMensagens(j);		
+			for (Participante p : mais_receberam) {
 				Console.escreverLinha(p.getNome());	
 			}
 			Console.escreverLinha("\t Ranking dos participantes que mais enviaram mensagens:");	
-			List<ParticipanteMensagens> mais_enviaram = servicoJogos.rankingEnviouMaisMensagens(j);		
-			for (ParticipanteMensagens p : mais_enviaram) {
+			List<Participante> mais_enviaram = servicoJogos.rankingEnviouMaisMensagens(j);		
+			for (Participante p : mais_enviaram) {
 				Console.escreverLinha(p.getNome());	
 			}
 //			Console.escreverLinha("\t Lista dos codinomes, com seus respectivos participantes:");	

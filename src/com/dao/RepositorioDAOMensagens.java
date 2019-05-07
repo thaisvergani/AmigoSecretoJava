@@ -61,19 +61,19 @@ public class RepositorioDAOMensagens extends RepositorioDAOBase<Mensagem, Long> 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ParticipanteMensagens> rankingEnviouMaisMensagens(Jogo jogo) {
+	public List<Participante> rankingEnviouMaisMensagens(Jogo jogo) {
 		return em
-			.createQuery("SELECT r, COUNT(m.id) as totalMensagens FROM Mensagem m JOIN m.jogo j JOIN m.remetente r WHERE j.id = :idJogo GROUP BY r ORDER BY COUNT(r) DESC")
-			.setParameter("idJogo", jogo.getId())
-			.getResultList();		
+				.createQuery("SELECT d FROM Mensagem m JOIN m.remetente d WHERE m.jogo = :idJogo GROUP BY d.id ORDER BY COUNT(m) DESC")
+				.setParameter("idJogo", jogo)
+				.getResultList();		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ParticipanteMensagens> rankingRecebeuMaisMensagens(Jogo jogo) {
+	public List<Participante> rankingRecebeuMaisMensagens(Jogo jogo) {
 		return em
-			.createQuery("SELECT d, COUNT(m.id) as totalMensagens FROM Mensagem m JOIN m.jogo j JOIN m.destinatario d WHERE j.id = :idJogo GROUP BY d ORDER BY COUNT(d) DESC")
-			.setParameter("idJogo", jogo.getId())
+			.createQuery("SELECT d FROM Mensagem m JOIN m.destinatario d WHERE m.jogo = :idJogo GROUP BY d.id ORDER BY COUNT(m) DESC")
+			.setParameter("idJogo", jogo)
 			.getResultList();
 	}
 	

@@ -121,7 +121,7 @@ public class MenuJogo implements Menu {
 	}
 	
 	private void rankingMensagensEnviadas() {
-		List<ParticipanteMensagens> participantes = servicoJogos.rankingRecebeuMaisMensagens(this.jogo);
+		List<Participante> participantes = servicoJogos.rankingRecebeuMaisMensagens(this.jogo);
 		if (participantes.size() == 0) {
 			Console.escreverLinha("Sem mensagens");
 			return;
@@ -129,14 +129,14 @@ public class MenuJogo implements Menu {
 
 		Console.escreverLinha("Ranking mensagens enviadas:");
 		int posicao = 0;
-		for (ParticipanteMensagens p : participantes) {
+		for (Participante p : participantes) {
 			posicao++;
-			Console.escreverLinha(posicao + " - " + p.getNome() + ": " + p.getTotalMensagens() + " mensagens");
+			Console.escreverLinha(posicao + " - " + p.getNome() );
 		}
 	}
 	
 	private void rankingMensagensRecebidas() {
-		List<ParticipanteMensagens> participantes = servicoJogos.rankingRecebeuMaisMensagens(this.jogo);
+		List<Participante> participantes = servicoJogos.rankingRecebeuMaisMensagens(this.jogo);
 		if (participantes.size() == 0) {
 			Console.escreverLinha("Sem mensagens");
 			return;
@@ -144,9 +144,9 @@ public class MenuJogo implements Menu {
 		
 		Console.escreverLinha("Ranking mensagens recebidas:");
 		int posicao = 0;
-		for (ParticipanteMensagens p : participantes) {
+		for (Participante p : participantes) {
 			posicao++;
-			Console.escreverLinha(posicao + " - " + p.getNome() + ": " + p.getTotalMensagens() + " mensagens");
+			Console.escreverLinha(posicao + " - " + p.getNome() );
 		}
 	}
 

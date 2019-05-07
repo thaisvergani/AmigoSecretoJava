@@ -14,7 +14,7 @@ public interface RepositorioMensagens extends Repositorio<Mensagem, Long> {
 	
 	int totalMensagens(Jogo jogo);
 	
-	List<ParticipanteMensagens> rankingEnviouMaisMensagens(Jogo jogo);
+	List<Participante> rankingEnviouMaisMensagens(Jogo jogo);
 	
-	List<ParticipanteMensagens> rankingRecebeuMaisMensagens(Jogo jogo);
+	List<Participante> rankingRecebeuMaisMensagens(Jogo jogo);
 }

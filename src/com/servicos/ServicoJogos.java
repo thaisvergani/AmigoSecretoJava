@@ -120,11 +120,11 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		return contexto.getRepositorioMensagens().buscarMensagensDoJogo(jogo);
 	}
 	
-	public List<ParticipanteMensagens> rankingRecebeuMaisMensagens(Jogo jogo) {
+	public List<Participante> rankingRecebeuMaisMensagens(Jogo jogo) {
 		return contexto.getRepositorioMensagens().rankingRecebeuMaisMensagens(jogo);
 	}
 
-	public List<ParticipanteMensagens> rankingEnviouMaisMensagens(Jogo jogo) {
+	public List<Participante> rankingEnviouMaisMensagens(Jogo jogo) {
 		return contexto.getRepositorioMensagens().rankingEnviouMaisMensagens(jogo);
 	}
 	
