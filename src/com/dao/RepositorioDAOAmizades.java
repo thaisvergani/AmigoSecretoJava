@@ -36,11 +36,12 @@ public class RepositorioDAOAmizades extends RepositorioDAOBase<Amizade, Long> im
 	
 	@Override
 	public Participante buscarAmigo(Jogo jogo, Participante participante) {
-	
+		
+
 		Object amigo_da_amizade = em
-				.createQuery("SELECT p FROM Participante p join Amizade a WHERE a.amigoSecreto = p.id and a.participante = :participante and a.jogo = :jogo")
-				.setParameter("participante", participante.getId())
-				.setParameter("jogo", jogo.getId())
+				.createQuery("SELECT s FROM Amizade a JOIN a.amigoSecreto s WHERE a.participante = :participante and a.jogo = :jogo")
+				.setParameter("participante", participante)
+				.setParameter("jogo", jogo)
 				.getSingleResult();
 		// TODO tem que ter o join pra conseguir retornar o objeto do participante (Amizada.amigoSecreto)?
 		// da pra selecionar direto o objeto participante?

@@ -52,8 +52,8 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 	public List<Jogo> buscarUltimosJogos(int quantidade) {
 	
 		Query query = em
-			.createQuery("SELECT j FROM Jogo j ORDER BY j.inicio DESC LIMIT :qty")
-			.setParameter("qty", quantidade);
+			.createQuery("SELECT j FROM Jogo j ORDER BY j.inicio DESC");
+		
 		if(query != null) {
 			return query.getResultList();
 			} else {

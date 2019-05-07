@@ -123,7 +123,7 @@ public class MenuParticipante implements Menu {
 		String novo_codinome = Console.ler();
 
 		Participante participanteAtualizado = servicoParticipantes.atualizar(
-				participanteAtual.getId(),
+				participanteAtual.id,
 				participanteAtual.getNome(),
 				novo_codinome, 
 				0);

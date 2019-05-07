@@ -19,7 +19,7 @@ public class Participante implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Participante_Sequence")
-	private Long id;
+	public Long id;
 
 	@Column(name = "nome", length = 60)
 	private String nome;
