@@ -15,6 +15,8 @@ import javax.persistence.Table;
 @SequenceGenerator(name="SugestaoAmigoSecreto_Sequence", sequenceName="fornecedor_produtos_seq", allocationSize=0, initialValue=1)
 public class SugestaoAmigoSecreto {
 	
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SugestaoAmigoSecreto_Sequence")
 	private Long id;
@@ -30,7 +32,14 @@ public class SugestaoAmigoSecreto {
 		this.participante = participante;
 		this.descricao = descricao;
 	}
+	public void setParticipante(Participante participante) {
+		this.participante = participante;
+	}
 
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	public Long getId() {
 		return id;
 	}

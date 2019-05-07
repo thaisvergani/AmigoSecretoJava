@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -51,6 +52,16 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 		return em
 			.createQuery("SELECT j FROM Jogo j ORDER BY j.inicio DESC LIMIT :qty")
 			.setParameter("qty", quantidade)
+			.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Jogo> buscarJogosEncerrados() {
+		Date dataAtual = new Date();
+		return em
+			.createQuery("SELECT j FROM Jogo j where j.fim < :hoje ORDER BY j.inicio DESC")
+			.setParameter("hoje", dataAtual)
 			.getResultList();
 	}
 

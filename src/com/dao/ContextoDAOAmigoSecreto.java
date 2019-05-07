@@ -11,6 +11,7 @@ import com.identidade.RepositorioMensagens;
 import com.identidade.RepositorioParticipantes;
 import com.identidade.RepositorioSugestoesJogos;
 import com.identidade.RepositorioSugestoesPresentes;
+import com.identidade.RepositorioAmizades;
 
 public class ContextoDAOAmigoSecreto implements ContextoAmigoSecreto {
 
@@ -20,6 +21,7 @@ public class ContextoDAOAmigoSecreto implements ContextoAmigoSecreto {
 	private RepositorioParticipantes repositorioParticipantes;
 	private RepositorioSugestoesJogos repositorioSugestoesJogos;
 	private RepositorioSugestoesPresentes repositorioSugestoesPresentes;
+	private RepositorioAmizades repositorioAmizades;
 	
 	public ContextoDAOAmigoSecreto() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("AmigoSecreto");
@@ -31,6 +33,8 @@ public class ContextoDAOAmigoSecreto implements ContextoAmigoSecreto {
 		this.repositorioParticipantes = new RepositorioDAOParticipantes(em);
 		this.repositorioSugestoesJogos = new RepositorioDAOSugestoesJogos(em);
 		this.repositorioSugestoesPresentes = new RepositorioDAOSugestoesPresentes(em);
+		this.repositorioAmizades = new RepositorioDAOAmizades(em);
+		
 	}
 	
 	@Override
@@ -62,4 +66,11 @@ public class ContextoDAOAmigoSecreto implements ContextoAmigoSecreto {
 	public RepositorioSugestoesPresentes getRepositorioSugestoesPresentes() {
 		return repositorioSugestoesPresentes;
 	}
+	
+	@Override
+	public RepositorioAmizades getRepositorioAmizades() {
+		return repositorioAmizades;
+	}
+	
+	
 }

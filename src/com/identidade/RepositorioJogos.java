@@ -14,5 +14,7 @@ public interface RepositorioJogos extends Repositorio<Jogo, Long> {
 	List<Amizade> buscarAmizadesDoJogo(Jogo jogo);
 	
 	void persistirAmizadesDoJogo(List<Amizade> amizades);
+
+	List<Jogo> buscarJogosEncerrados();
 	
 }

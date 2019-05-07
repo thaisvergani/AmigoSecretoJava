@@ -53,6 +53,10 @@ public class ServicoParticipantes extends ServicoBase<Participante, Long> {
 		
 		return participante;
 	}
+	
+	public Participante buscarPeloCodinome(String codinome) {
+		return ((RepositorioParticipantes)repositorio).buscarParticipante(codinome);
+	}
 
 	public List<Participante> buscarTodos() {
 		return ((RepositorioParticipantes)repositorio).buscarTodosParticipantes();

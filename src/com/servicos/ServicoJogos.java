@@ -1,5 +1,6 @@
 package com.servicos;
 
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +30,16 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		return criarNovo(fim, null);
 	}
 	
+	public Jogo buscarJogoAtual()  throws ExcecaoValidacaoServico {
+		List<Jogo> ultimosJogos = ((RepositorioJogos)repositorio).buscarUltimosJogos(1);
+		return ultimosJogos.get(0);
+	}
+	
+	public List<Jogo> buscarJogosEncerrados()  throws ExcecaoValidacaoServico {
+		List<Jogo> jogosEncerrados = ((RepositorioJogos)repositorio).buscarJogosEncerrados();
+		return jogosEncerrados;
+	}
+	
 	public Jogo criarNovo(Date fim, String nome) throws ExcecaoValidacaoServico {
 		List<Participante> participantes = contexto.getRepositorioParticipantes().buscarTodosParticipantes();
 		if (participantes.size() < 3) {
@@ -54,6 +65,14 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		((RepositorioJogos)repositorio).persistirAmizadesDoJogo(amizadesJogo);
 		
 		return jogo;
+	}
+	
+	public List<Jogo> buscarTodosJogos() {
+		return ((RepositorioJogos)repositorio).buscarTodosJogos();
+	}
+	
+	public List<Amizade> buscarAmizadesDoJogo(Jogo jogo) {
+		return ((RepositorioJogos)repositorio).buscarAmizadesDoJogo(jogo);
 	}
 	
 	public SugestaoPresente cadastrarSugestaoPresente(Jogo jogo, Participante participante, String descricao) throws ExcecaoValidacaoServico {
@@ -173,8 +192,26 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 			amizade.setAmigoSecreto(amigoSecreto);
 			participantes.remove(amigoSecreto);	
 		}
-		// todo: gerar codinomes
+
+		for (Participante p: participantes) {
+
+		    byte[] array = new byte[7]; // length is bounded by 7
+		    new Random().nextBytes(array);
+		    String codinome = new String(array, Charset.forName("UTF-8"));
+		    p.setCodinome(codinome); 
+		    contexto.getRepositorioParticipantes().atualizar(p);
+
+		}
 		
 		return amizades;
+	}
+	
+	public Participante buscarAmigoSecreto(Jogo jogo, Participante participante) {
+		Participante amigo = contexto.getRepositorioAmizades().buscarAmigo(jogo, participante);
+		return amigo;
+	}
+
+	public List<Amizade> historicoAmizades(Jogo j) {
+		return contexto.getRepositorioAmizades().buscarAmizadesDoJogo(j);
 	}
 }
