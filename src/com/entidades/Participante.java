@@ -27,9 +27,6 @@ public class Participante implements Serializable {
 	@Column(name = "codinome", length = 60)
 	private String codinome;
 	
-	@Column(name = "ramal", nullable = true)
-	private int ramal;
-	
 	public Participante() {
 		
 	}
@@ -60,14 +57,6 @@ public class Participante implements Serializable {
 	
 	public void setCodinome(String codinome) {
 		this.codinome = codinome;
-	}
-	
-	public int getRamal() {
-		return ramal;
-	}
-	
-	public void setRamal(int ramal) {
-		this.ramal = ramal;
 	}
 
 	@Override

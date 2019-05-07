@@ -25,8 +25,7 @@ public class MenuAdmin implements Menu {
 	public MenuAdmin(ContextoAmigoSecreto contexto) {
 		if (contexto == null) {
 			throw new IllegalArgumentException("Necessario passar o contexto da aplicacao");
-		}
-		Console.escreverLinha("iniciando modo de admin");
+		}		
 
 		servicoAvisos = new ServicoAvisos(contexto);
 		servicoJogos = new ServicoJogos(contexto);
@@ -108,6 +107,8 @@ public class MenuAdmin implements Menu {
 		for (Aviso a : avisos) {
 			Console.escreverLinha("- " + a.getMensagem());
 		}
+		
+		Console.lerTeclaParaContinuar();
 	}
 	
 	private void listarSugestoes() {
@@ -120,6 +121,8 @@ public class MenuAdmin implements Menu {
 		for (SugestaoAmigoSecreto s : sugestoes) {
 			Console.escreverLinha("- " + s.getParticipante().getNome() + ": " + s.getDescricao());
 		}
+		
+		Console.lerTeclaParaContinuar();
 	}
 	
 	private void listarJogos() {
@@ -156,7 +159,7 @@ public class MenuAdmin implements Menu {
 		Console.escrever("Escreva o codinome do participante: ");
 		String codinome = Console.lerLinha();
 		
-		servicoParticipantes.adicionar(nome, codinome, 0);
+		servicoParticipantes.adicionar(nome, codinome);
 		Console.escreverLinha("Participante criado com sucesso");
 	}
 	

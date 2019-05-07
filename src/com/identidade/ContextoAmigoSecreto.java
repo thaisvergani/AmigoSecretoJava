@@ -15,4 +15,6 @@ public interface ContextoAmigoSecreto {
 	RepositorioSugestoesPresentes getRepositorioSugestoesPresentes();
 
 	RepositorioAmizades getRepositorioAmizades();
+	
+	void close();
 }
