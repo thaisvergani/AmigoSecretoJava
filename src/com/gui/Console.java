@@ -13,7 +13,12 @@ public class Console {
 		return _scanner.nextLine();
 	}
 
-	public static String ler() {
+	public static void lerTeclaParaContinuar() {
+		escreverLinha("Pressione qualquer tecla para continuar...");
+		ler();
+	}
+	
+	public static String ler() {		
 		return _scanner.next();
 	}
 

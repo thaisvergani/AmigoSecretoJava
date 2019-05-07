@@ -12,7 +12,7 @@ public class ServicoParticipantes extends ServicoBase<Participante, Long> {
 		super(contexto, contexto.getRepositorioParticipantes());
 	}
 	
-	public Participante adicionar(String nome, String codinome, int ramal) throws ExcecaoValidacaoServico {
+	public Participante adicionar(String nome, String codinome) throws ExcecaoValidacaoServico {
 		if (nome == null) {
 			throw new ExcecaoValidacaoServico("Nome do participante precisa ser informado");
 		}
@@ -24,14 +24,13 @@ public class ServicoParticipantes extends ServicoBase<Participante, Long> {
 		Participante participante = new Participante();
 		participante.setNome(nome);
 		participante.setCodinome(codinome);
-		participante.setRamal(ramal);
 		
 		repositorio.adicionar(participante);
 		
 		return participante;
 	}
 	
-	public Participante atualizar(Long id, String nome, String codinome, int ramal) throws ExcecaoValidacaoServico {
+	public Participante atualizar(Long id, String nome, String codinome) throws ExcecaoValidacaoServico {
 		if (nome == null) {
 			throw new ExcecaoValidacaoServico("Nome do participante precisa ser informado");
 		}
@@ -47,7 +46,6 @@ public class ServicoParticipantes extends ServicoBase<Participante, Long> {
 		
 		participante.setNome(nome);
 		participante.setCodinome(codinome);
-		participante.setRamal(ramal);
 		
 		repositorio.atualizar(participante);
 		

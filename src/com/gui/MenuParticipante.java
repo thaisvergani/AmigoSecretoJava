@@ -125,8 +125,7 @@ public class MenuParticipante implements Menu {
 		Participante participanteAtualizado = servicoParticipantes.atualizar(
 				participanteAtual.id,
 				participanteAtual.getNome(),
-				novo_codinome, 
-				0);
+				novo_codinome);
 		participanteAtual = participanteAtualizado;
 	}
 	
