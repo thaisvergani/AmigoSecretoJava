@@ -7,8 +7,8 @@ public class Principal {
 
 	public static void main(String[] args) {
 		ContextoAmigoSecreto contexto = new ContextoDAOAmigoSecreto();		
-		Escritor.EscreverLinha("Informe o login");
-		String nome_user = Leitor.ler();
+		Console.escreverLinha("Informe o login");
+		String nome_user = Console.ler();
 		if (nome_user.equals("admin")) {
 			new MenuAdmin(contexto).entrar();		
 

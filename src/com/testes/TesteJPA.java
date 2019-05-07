@@ -19,23 +19,14 @@ public class TesteJPA {
 	
 	public static void main(String[] args) {
 		
-		boolean testesFuncionaram;
-	
 		try {
 			init();
 			testarAvisos();	
 			
 			
-			testesFuncionaram = true;
+			System.out.println("Testes funcionaram");
 		} catch (Exception e) {
 			e.printStackTrace();
-			testesFuncionaram = false;
-		}
-		
-		
-		if (testesFuncionaram) {
-			System.out.println("Testes funcionaram");
-		} else {
 			System.out.println("Testes nao funcionaram");
 		}
 	}

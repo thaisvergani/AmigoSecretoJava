@@ -66,6 +66,14 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		return jogo;
 	}
 	
+	public List<Jogo> buscarTodosJogos() {
+		return ((RepositorioJogos)repositorio).buscarTodosJogos();
+	}
+	
+	public List<Amizade> buscarAmizadesDoJogo(Jogo jogo) {
+		return ((RepositorioJogos)repositorio).buscarAmizadesDoJogo(jogo);
+	}
+	
 	public SugestaoPresente cadastrarSugestaoPresente(Jogo jogo, Participante participante, String descricao) throws ExcecaoValidacaoServico {
 		if (jogo == null) {
 			throw new ExcecaoValidacaoServico("Necessario informar qual o jogo que essa sugestao pertence");
