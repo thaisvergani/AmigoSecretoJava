@@ -169,23 +169,28 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		Collections.shuffle(participantes);
 		
 		List<Amizade> amizades = new ArrayList<Amizade>(participantes.size());
+		Map<Long, List<Long>> amizadesProibidas = new HashMap<Long, List<Long>>();
 		
 		for (Participante p : participantes) {			
+			
+			//byte[] array = new byte[7]; // length is bounded by 7
+		    //new Random().nextBytes(array);
+		    //String codinome = new String(array, Charset.forName("UTF-8"));
+		    //p.setCodinome(codinome); 
+		    //contexto.getRepositorioParticipantes().atualizar(p);
+			
 			amizades.add(new Amizade(p, jogo));
-		}
-		
-		Map<Long, List<Long>> amizadesDosUltimosJogos = new HashMap<Long, List<Long>>();
+			
+			List<Long> lista = new ArrayList<Long>();
+			lista.add(p.getId());
+			amizadesProibidas.put(p.getId(), lista);
+		}				
 		
 		for (Jogo j : ultimosJogos) {
 			for (Amizade a : ((RepositorioJogos)repositorio).buscarAmizadesDoJogo(j)) {
 				Long idParticipante = a.getParticipante().getId();
-				List<Long> ultimasAmizadesParticipante = amizadesDosUltimosJogos.get(idParticipante);
-				if (ultimasAmizadesParticipante == null) {
-					ultimasAmizadesParticipante = new ArrayList<Long>();					
-					amizadesDosUltimosJogos.put(idParticipante, ultimasAmizadesParticipante);
-				}
-				
-				ultimasAmizadesParticipante.add(a.getAmigoSecreto().getId());
+				List<Long> amizadesSecretasProibidas = amizadesProibidas.get(idParticipante);
+				amizadesSecretasProibidas.add(a.getAmigoSecreto().getId());
 			}
 		}
 		
@@ -193,9 +198,7 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		
 		for (Amizade amizade : amizades) {
 			Long participanteId = amizade.getParticipante().getId();
-			List<Long> participantesProibidos = amizadesDosUltimosJogos.get(participanteId);
-			if (participantesProibidos == null) participantesProibidos = new ArrayList<Long>();
-			participantesProibidos.add(participanteId);
+			List<Long> participantesProibidos = amizadesProibidas.get(participanteId);
 			
 			Participante amigoSecreto = null;
 			
@@ -205,18 +208,7 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 			} while (participantesProibidos.contains(amigoSecreto.getId()));
 			
 			amizade.setAmigoSecreto(amigoSecreto);
-			participantes.remove(amigoSecreto);	
-		}
-
-		for (Participante p: participantes) {
-
-		    byte[] array = new byte[7]; // length is bounded by 7
-		    new Random().nextBytes(array);
-		    String codinome = new String(array, Charset.forName("UTF-8"));
-		    p.setCodinome(codinome); 
-		    contexto.getRepositorioParticipantes().atualizar(p);
-
-		}
+		}		
 		
 		return amizades;
 	}
