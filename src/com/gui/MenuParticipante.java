@@ -43,6 +43,7 @@ public class MenuParticipante implements Menu {
 		servicoParticipantes = new ServicoParticipantes(contexto);
 		servicoMensagens = new ServicoMensagens(contexto);
 		servicoSugestaoesJogo = new ServicoSugestoesJogo(contexto);
+		servicoSugestoesPresente = new ServicoSugestoesPresente(contexto);
 		
 		try {
 			jogoAtual = servicoJogos.buscarJogoAtual();
@@ -138,7 +139,7 @@ public class MenuParticipante implements Menu {
 	
 	public void enviarSugestaoPresente() throws ExcecaoValidacaoServico {
 		Console.escreverLinha("Informe sua sugestao de presente:");
-		String sugestao = Console.ler();
+		String sugestao = Console.lerLinha();
 		servicoSugestoesPresente.cadastrar(jogoAtual, participanteAtual, sugestao);
 	}
 	
@@ -158,7 +159,7 @@ public class MenuParticipante implements Menu {
 	
 	public void enviarMensagem() throws ExcecaoValidacaoServico {
 		Console.escreverLinha("Digite a Mensagem a ser enviada para seu amigo secreto");		
-		String texto = Console.ler();
+		String texto = Console.lerLinha();
 		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);
 	
 	

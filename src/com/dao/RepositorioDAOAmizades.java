@@ -43,8 +43,7 @@ public class RepositorioDAOAmizades extends RepositorioDAOBase<Amizade, Long> im
 				.setParameter("participante", participante)
 				.setParameter("jogo", jogo)
 				.getSingleResult();
-		// TODO tem que ter o join pra conseguir retornar o objeto do participante (Amizada.amigoSecreto)?
-		// da pra selecionar direto o objeto participante?
+	
 		Participante amigo_secreto = (Participante)amigo_da_amizade;
 			
 		if (amigo_secreto != null) {

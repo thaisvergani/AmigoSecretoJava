@@ -20,7 +20,7 @@ public abstract class RepositorioDAOBase<T, K> implements Repositorio<T, K> {
 		
 		em = entityManager;
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-		this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[1];
+		this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
 	}
 	
 	@Override

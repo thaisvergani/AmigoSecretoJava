@@ -41,6 +41,10 @@ public class Mensagem implements Serializable {
 	@JoinColumn(name="remetente")
 	private Participante remetente;
 	
+	public Mensagem() {
+		
+	}
+
 	public Mensagem(String texto, Date data, Participante remetente, Participante destinatario, Jogo jogo) {
 		this.texto = texto;
 		this.data = data;
