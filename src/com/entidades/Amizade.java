@@ -36,6 +36,10 @@ public class Amizade implements Serializable {
 	@JoinColumn(name="amigo_secreto")
 	private Participante amigoSecreto;
 	
+	public Amizade() {
+		
+	}
+	
 	public Amizade(Participante participante, Jogo jogo) {
 		this.participante = participante;
 		this.jogo = jogo;

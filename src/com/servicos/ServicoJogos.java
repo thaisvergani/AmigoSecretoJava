@@ -151,7 +151,7 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 	private List<Amizade> sorteio(Jogo jogo, List<Participante> participantes, List<Jogo> ultimosJogos) {
 		
 		// Se tivermos mais jogos do que participantes nao tem como evitar a repeticao de amizades 
-		while (participantes.size() < ultimosJogos.size() - 1) {
+		while (participantes.size() - 2 < ultimosJogos.size()) {
 			ultimosJogos.remove(ultimosJogos.size() - 1);
 		}
 		
@@ -170,7 +170,7 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 				Long idParticipante = a.getParticipante().getId();
 				List<Long> ultimasAmizadesParticipante = amizadesDosUltimosJogos.get(idParticipante);
 				if (ultimasAmizadesParticipante == null) {
-					ultimasAmizadesParticipante = new ArrayList<Long>();
+					ultimasAmizadesParticipante = new ArrayList<Long>();					
 					amizadesDosUltimosJogos.put(idParticipante, ultimasAmizadesParticipante);
 				}
 				
@@ -181,13 +181,17 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		Random random = new Random();
 		
 		for (Amizade amizade : amizades) {
-			List<Long> participantesProibidos = amizadesDosUltimosJogos.get(amizade.getParticipante().getId());
+			Long participanteId = amizade.getParticipante().getId();
+			List<Long> participantesProibidos = amizadesDosUltimosJogos.get(participanteId);
+			if (participantesProibidos == null) participantesProibidos = new ArrayList<Long>();
+			participantesProibidos.add(participanteId);
+			
 			Participante amigoSecreto = null;
 			
 			do {
 				int indice = random.nextInt(participantes.size());
 				amigoSecreto = participantes.get(indice);
-			} while (participantesProibidos != null && !participantesProibidos.contains(amigoSecreto.getId()));
+			} while (participantesProibidos.contains(amigoSecreto.getId()));
 			
 			amizade.setAmigoSecreto(amigoSecreto);
 			participantes.remove(amigoSecreto);	
