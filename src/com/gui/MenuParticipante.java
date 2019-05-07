@@ -6,6 +6,7 @@ import com.entidades.Aviso;
 import com.entidades.Jogo;
 import com.entidades.Mensagem;
 import com.entidades.Participante;
+import com.entidades.ParticipanteMensagens;
 import com.identidade.ContextoAmigoSecreto;
 import com.servicos.ExcecaoValidacaoServico;
 import com.servicos.ServicoAvisos;
@@ -89,6 +90,9 @@ public class MenuParticipante implements Menu {
 					case 7:
 						enviarSugestaoJogo();
 						break;
+					case 8:
+						demonstrativos();
+						break;
 					default:
 						Escritor.EscreverLinha("Opção inválida");		
 	
@@ -99,6 +103,7 @@ public class MenuParticipante implements Menu {
 			}
 		}
 	}
+	
 	public void verAmigoAtual() {
 		Participante amigo = servicoJogos.buscarAmigoSecreto(jogoAtual, participanteAtual);
 		Escritor.EscreverLinha("Seu amigo secreto atual é:");
@@ -146,6 +151,26 @@ public class MenuParticipante implements Menu {
 		Escritor.EscreverLinha("Digite a Mensagem a ser enviada para seu amigo secreto");		
 		String texto = Leitor.ler();
 		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);		
+	}
+	public void demonstrativos( ) throws ExcecaoValidacaoServico {
+		List<Jogo> jogos = servicoJogos.buscarJogosEncerrados();
+		for (Jogo j : jogos) {
+			
+			Escritor.EscreverLinha("Jogo:" + j.getNome());	
+			Escritor.EscreverLinha("\t Total de mensagens:" );	
+			Escritor.EscreverLinha("\t Ranking dos participantes que mais receberam mensagens:");	
+			List<ParticipanteMensagens> mais_receberam = servicoJogos.rankingRecebeuMaisMensagens(j);		
+			for (ParticipanteMensagens p : mais_receberam) {
+				Escritor.EscreverLinha(p.getNome());	
+			}
+			Escritor.EscreverLinha("\t Ranking dos participantes que mais enviaram mensagens:");	
+			List<ParticipanteMensagens> mais_enviaram = servicoJogos.rankingEnviouMaisMensagens(j);		
+			for (ParticipanteMensagens p : mais_enviaram) {
+				Escritor.EscreverLinha(p.getNome());	
+			}
+//			Escritor.EscreverLinha("\t Lista dos codinomes, com seus respectivos participantes:");	
+//			Escritor.EscreverLinha("\t Lista de quem tirou quem:");	
+		}
 	}
 
 }

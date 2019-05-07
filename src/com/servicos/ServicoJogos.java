@@ -34,6 +34,11 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 		return ultimosJogos.get(0);
 	}
 	
+	public List<Jogo> buscarJogosEncerrados()  throws ExcecaoValidacaoServico {
+		List<Jogo> jogosEncerrados = ((RepositorioJogos)repositorio).buscarJogosEncerrados();
+		return jogosEncerrados;
+	}
+	
 	public Jogo criarNovo(Date fim, String nome) throws ExcecaoValidacaoServico {
 		List<Participante> participantes = contexto.getRepositorioParticipantes().buscarTodosParticipantes();
 		if (participantes.size() < 3) {
