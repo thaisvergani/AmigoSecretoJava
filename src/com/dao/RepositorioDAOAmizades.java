@@ -66,7 +66,7 @@ public class RepositorioDAOAmizades extends RepositorioDAOBase<Amizade, Long> im
 			.setParameter("idJogo", jogo.getId())
 			.getResultList();
 		
-		// TODO isso vai retornar os objetos de participante também??
+		// TODO isso vai retornar os objetos de participante tambem??
 	}
 	
 	
