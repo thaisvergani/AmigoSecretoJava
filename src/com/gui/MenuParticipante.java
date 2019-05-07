@@ -7,6 +7,7 @@ import com.servicos.ExcecaoValidacaoServico;
 import com.servicos.ServicoAvisos;
 import com.servicos.ServicoJogos;
 import com.servicos.ServicoParticipantes;
+import com.servicos.ServicoSugestoesJogo;
 import com.servicos.ServicoMensagens;
 
 
@@ -18,6 +19,7 @@ public class MenuParticipante implements Menu {
 	private ServicoJogos servicoJogos;
 	private ServicoParticipantes servicoParticipantes;	
 	private ServicoMensagens servicoMensagens;	
+	private ServicoSugestoesJogo servicoSugestaoesJogo;
 	
 	public MenuParticipante(ContextoAmigoSecreto contexto, String nome_user) {
 		if (contexto == null) {
@@ -27,10 +29,12 @@ public class MenuParticipante implements Menu {
 		servicoAvisos = new ServicoAvisos(contexto);
 		servicoJogos = new ServicoJogos(contexto);
 		servicoParticipantes = new ServicoParticipantes(contexto);
+		servicoMensagens = new ServicoMensagens(contexto);
+		servicoSugestaoesJogo = new ServicoSugestoesJogo(contexto);
+		
 		try {
-			jogoAtual =  servicoJogos.buscarJogoAtual();
+			jogoAtual = servicoJogos.buscarJogoAtual();
 		} catch (ExcecaoValidacaoServico e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		participanteAtual = contexto.getRepositorioParticipantes().buscarParticipante(nome_user);
@@ -53,28 +57,35 @@ public class MenuParticipante implements Menu {
 		
 			Escritor.EscreverLinha("0 - Sair");
 			opcao = Leitor.lerInt();
-			
-			switch(opcao){
-				case 0:			
-					break;
-				case 1:
-					verAmigoAtual();
-					break;
-				case 2:
+			try {
+
+				switch(opcao){
+					case 0:			
+						break;
+					case 1:
+						verAmigoAtual();
+						break;
+					case 2:
+						alterarCodinome();
+						break;
+					case 3:
+						enviarSugestao();
+						break;
+					case 4:
+						enviarMensagem();
 					
-					break;
-				case 3:
-					
-					break;
-				case 4:
-					enviarMensagem();
-					break;
-				case 5:
-					
-					break;
-				default:
-					Escritor.EscreverLinha("Opção inválida");		
-			}	
+						break;
+					case 5:
+						
+						break;
+					default:
+						Escritor.EscreverLinha("Opção inválida");		
+	
+				}	
+			} catch (ExcecaoValidacaoServico e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	public void verAmigoAtual() {
@@ -82,16 +93,30 @@ public class MenuParticipante implements Menu {
 		Escritor.EscreverLinha("Seu amigo secreto atual é:");
 		Escritor.EscreverLinha(amigo.getNome());
 	}
+	public void alterarCodinome() throws ExcecaoValidacaoServico {
+		Escritor.EscreverLinha("Informe seu novo codinome:");
+		String novo_codinome = Leitor.ler();
+
+		Participante participanteAtualizado = servicoParticipantes.atualizar(
+				participanteAtual.getId(),
+				participanteAtual.getNome(),
+				novo_codinome, 
+				0);
+		participanteAtual = participanteAtualizado;
+	}
+	public void enviarSugestao() throws ExcecaoValidacaoServico {
+		Escritor.EscreverLinha("Deixe sua sugestão para o jogo:");
+		String mensagem = Leitor.ler();
+
+		servicoSugestaoesJogo.cadastrar(participanteAtual, mensagem);
+
+	}
 	
-	public void enviarMensagem() {
-		Escritor.EscreverLinha("Digite a Mensagem");		
+	public void enviarMensagem() throws ExcecaoValidacaoServico {
+		Escritor.EscreverLinha("Digite a Mensagem a ser enviada para seu amigo secreto");		
 		String texto = Leitor.ler();
-		try {
-			servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);
-		} catch (ExcecaoValidacaoServico e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		servicoJogos.cadastrarMensagem(texto, participanteAtual.getCodinome(), amigoSecreto.getCodinome(), jogoAtual);
+	
 	
 		
 	}
