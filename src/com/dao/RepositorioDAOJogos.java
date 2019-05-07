@@ -22,15 +22,15 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 			return;
 		}
 		
-		try {
-			em.getTransaction().begin();
-			for	(Amizade amizade : amizades) {
+		for	(Amizade amizade : amizades) {
+			try {
+				em.getTransaction().begin();
 				em.persist(amizade);
+				em.getTransaction().commit();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				em.getTransaction().rollback();
 			}
-			em.getTransaction().commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			em.getTransaction().rollback();
 		}
 	}
 	
@@ -42,8 +42,8 @@ public class RepositorioDAOJogos extends RepositorioDAOBase<Jogo, Long> implemen
 		}
 		
 		return em
-			.createQuery("SELECT a FROM Amizade a JOIN a.jogo j WHERE j.id = :idJogo")
-			.setParameter("idJogo", jogo.getId())
+			.createQuery("SELECT a FROM Amizade a WHERE a.jogo = :jogo")
+			.setParameter("jogo", jogo)
 			.getResultList();
 	}
 

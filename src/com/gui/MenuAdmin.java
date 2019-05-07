@@ -17,6 +17,7 @@ import com.servicos.ServicoSugestoesJogo;
 
 public class MenuAdmin implements Menu {
 
+	private ContextoAmigoSecreto contexto;
 	private ServicoAvisos servicoAvisos;
 	private ServicoJogos servicoJogos;
 	private ServicoParticipantes servicoParticipantes;	
@@ -27,6 +28,7 @@ public class MenuAdmin implements Menu {
 			throw new IllegalArgumentException("Necessario passar o contexto da aplicacao");
 		}		
 
+		this.contexto = contexto;
 		servicoAvisos = new ServicoAvisos(contexto);
 		servicoJogos = new ServicoJogos(contexto);
 		servicoParticipantes = new ServicoParticipantes(contexto);
@@ -78,7 +80,7 @@ public class MenuAdmin implements Menu {
 			System.out.println("Nao existe nenhum participante.");
 			return;
 		}
-		
+				
 		Console.escreverLinha("Escolha qual participante deseja acessar:");
 		
 		for (int i = 0; i < participantes.size(); i++) {
@@ -93,8 +95,8 @@ public class MenuAdmin implements Menu {
 		opcao--;
 		if (participantes.size() <= opcao) return;
 		
-		Participante jogo = participantes.get(opcao);
-		// TODO Entrar no menu participante como Admin
+		Participante p = participantes.get(opcao);
+		new MenuParticipante(contexto, p.getNome()).entrar();
 	}
 	
 	private void listarAvisos() {
