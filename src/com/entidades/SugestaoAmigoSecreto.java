@@ -27,7 +27,10 @@ public class SugestaoAmigoSecreto {
 	
 	@Column(name="descricao", length=255)
 	private String descricao;	
-
+	
+	public SugestaoAmigoSecreto() {
+		
+	}
 	public SugestaoAmigoSecreto(Participante participante, String descricao) {
 		this.participante = participante;
 		this.descricao = descricao;
