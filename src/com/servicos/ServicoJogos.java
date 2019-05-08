@@ -194,20 +194,22 @@ public class ServicoJogos extends ServicoBase<Jogo, Long> {
 			}
 		}
 		
-		Random random = new Random();
+		
 		
 		for (Amizade amizade : amizades) {
 			Long participanteId = amizade.getParticipante().getId();
 			List<Long> participantesProibidos = amizadesProibidas.get(participanteId);
 			
 			Participante amigoSecreto = null;
-			
+						
+			Random random = new Random(participantes.size() * 10);
 			do {
 				int indice = random.nextInt(participantes.size());
-				amigoSecreto = participantes.get(indice);
+				amigoSecreto = participantes.get(indice);			
 			} while (participantesProibidos.contains(amigoSecreto.getId()));
 			
 			amizade.setAmigoSecreto(amigoSecreto);
+			participantes.remove(amigoSecreto);
 		}		
 		
 		return amizades;
